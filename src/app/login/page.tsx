@@ -1,25 +1,29 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useMutation } from 'react-query';
-import { mockLogin } from '@/lib/api/auth';
-import { useRouter } from 'next/navigation'; 
+import { useState } from "react";
+import { useMutation } from "react-query";
+import { mockLogin } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const mutation = useMutation(({ username, password }: { username: string; password: string }) => mockLogin(username, password), {
-    onSuccess: (data) => {
-      // Store the token and redirect on success
-      console.log('Login successful!', data.token);
-      router.push('/dashboard'); // Redirect to the dashboard or another page
+  const mutation = useMutation(
+    ({ username, password }: { username: string; password: string }) =>
+      mockLogin(username, password),
+    {
+      onSuccess: (data) => {
+        // Store the token and redirect on success
+        console.log("Login successful!", data.token);
+        router.push("/dashboard"); // Redirect to the dashboard
+      },
+      onError: (error) => {
+        console.error("Login failed", error);
+      },
     },
-    onError: (error) => {
-      console.error('Login failed', error);
-    },
-  });
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
