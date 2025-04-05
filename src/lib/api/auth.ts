@@ -3,15 +3,22 @@ export const mockLogin = async (username: string, password: string) => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
   if (username === "user" && password === "password") {
     const token = "mock-jwt-token"; // Mock JWT
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem("token", token);
+    console.log("Login successful, token generated:", token);
+    // Set token as a cookie
+    if (typeof document !== "undefined") {
+      document.cookie = `token=${token}; path=/; max-age=3600; SameSite=Strict;`;
     }
     return { token };
   }
   throw new Error("Invalid credentials");
 };
+
 export const getToken = () => {
-  return typeof localStorage !== "undefined"
-    ? localStorage.getItem("token")
-    : null;
+  // Retrieve the token from cookies
+  if (typeof document !== "undefined") {
+    const cookies = document.cookie.split("; ");
+    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
+    return tokenCookie ? tokenCookie.split("=")[1] : null;
+  }
+  return null;
 };
