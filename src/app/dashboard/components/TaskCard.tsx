@@ -5,7 +5,7 @@ interface TaskCardProps {
   assignee: string;
   priority: string;
   dueDate: string;
-  status: string; // Added status field
+  status: string;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({
@@ -22,7 +22,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
       <p className="text-sm text-gray-500">Priority: {priority}</p>
       <p className="text-sm text-gray-500">Due Date: {dueDate}</p>
       <p className="text-sm font-semibold mt-2">Status: {status}</p>{" "}
-      {/* Display status */}
     </div>
   );
 };
