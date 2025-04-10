@@ -1,7 +1,7 @@
 export const mockLogin = async (username: string, password: string) => {
   // Replace with API call when Kevin's BE is ready
   await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
-  if (username === "user" && password === "password") {
+  if (username === "admin" && password === "pass") {
     const token = "mock-jwt-token"; // Mock JWT
     console.log("Login successful, token generated:", token);
     // Set token as a cookie
