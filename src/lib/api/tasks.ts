@@ -3,6 +3,9 @@ type Task = {
   name: string;
   description: string;
   status: string;
+  assignee: string;
+  priority: string;
+  dueDate: string;
 };
 
 type TaskPayload = Omit<Task, "id">;
@@ -18,8 +21,19 @@ const tasks = [
     name: "Task 1",
     description: "Complete the feature",
     status: "In Progress",
+    assignee: "Me",
+    priority: "Low",
+    dueDate: "2025-10-15",
   },
-  { id: 2, name: "Task 2", description: "Fix the bug", status: "Completed" },
+  {
+    id: 2,
+    name: "Task 2",
+    description: "Fix the bug",
+    status: "Done",
+    assignee: "Me",
+    priority: "Low",
+    dueDate: "2025-10-15",
+  },
 ];
 
 export const getTasks = (): Promise<typeof tasks | Error> => {
