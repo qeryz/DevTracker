@@ -14,19 +14,7 @@ const DashboardContainer: React.FC = () => {
     return <div>Error: {tasks.message}</div>;
   }
 
-  return (
-    <Dashboard
-      tasks={
-        tasks
-          ? tasks.map((task) => ({
-              ...task,
-              id: task.id.toString(),
-            }))
-          : []
-      }
-      addTaskMutation={addTaskMutation}
-    />
-  );
+  return <Dashboard tasks={tasks || []} addTaskMutation={addTaskMutation} />;
 };
 
 export default DashboardContainer;

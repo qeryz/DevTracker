@@ -1,24 +1,11 @@
 import React from "react";
 import Column from "./Column";
+import { Task, TaskPayload } from "@/lib/api/tasks";
 
 interface DashboardProps {
-  tasks: {
-    id: string;
-    name: string;
-    assignee: string;
-    priority: string;
-    dueDate: string;
-    status: string;
-  }[];
+  tasks: Task[];
   addTaskMutation: {
-    mutate: (task: {
-      name: string;
-      description: string;
-      status: string;
-      assignee: string;
-      priority: string;
-      dueDate: string;
-    }) => void;
+    mutate: (task: TaskPayload) => void;
   };
 }
 
@@ -44,12 +31,15 @@ const Dashboard: React.FC<DashboardProps> = ({ tasks, addTaskMutation }) => {
       <button
         onClick={() =>
           addTaskMutation.mutate({
-            name: "New Task",
+            title: "New Task",
             description: "Description",
             status: "To Do",
             assignee: " ",
             priority: "Low",
-            dueDate: new Date().toISOString().split("T")[0],
+            epic: "Epic 1",
+            sprint: "Sprint 1",
+            tags: ["new", "task"],
+            created_by: "User1",
           })
         }
         className="mt-6 bg-blue-500 text-white py-2 px-4 rounded"

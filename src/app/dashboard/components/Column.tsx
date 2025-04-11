@@ -1,15 +1,10 @@
 import React from "react";
 import TaskCard from "./TaskCard";
+import { Task } from "@/lib/api/tasks";
 
 interface ColumnProps {
   title: string;
-  tasks: {
-    name: string;
-    assignee: string;
-    priority: string;
-    dueDate: string;
-    status: string;
-  }[];
+  tasks: Task[];
 }
 
 const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
@@ -18,14 +13,7 @@ const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
       <h2 className="text-xl font-bold mb-4">{title}</h2>
       <div>
         {tasks.map((task, index) => (
-          <TaskCard
-            key={index}
-            name={task.name}
-            assignee={task.assignee}
-            priority={task.priority}
-            dueDate={task.dueDate}
-            status={task.status} // Pass status to TaskCard
-          />
+          <TaskCard key={index} task={task} />
         ))}
       </div>
     </div>
