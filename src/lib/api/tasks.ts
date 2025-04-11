@@ -1,14 +1,17 @@
-type Task = {
+export type Task = {
   id: number;
-  name: string;
+  title: string;
   description: string;
+  epic: string;
+  sprint: string;
   status: string;
   assignee: string;
   priority: string;
-  dueDate: string;
+  tags: string[];
+  created_by: string;
 };
 
-type TaskPayload = Omit<Task, "id">;
+export type TaskPayload = Omit<Task, "id">;
 
 type UpdateTaskInput = {
   id: number;
@@ -18,21 +21,27 @@ type UpdateTaskInput = {
 const tasks = [
   {
     id: 1,
-    name: "Task 1",
+    title: "Task 1",
     description: "Complete the feature",
     status: "In Progress",
+    epic: "Epic 1",
+    sprint: "Sprint 1",
     assignee: "Me",
     priority: "Low",
-    dueDate: "2025-10-15",
+    created_by: "User1",
+    tags: ["feature", "urgent"],
   },
   {
     id: 2,
-    name: "Task 2",
+    title: "Task 2",
     description: "Fix the bug",
     status: "Done",
-    assignee: "Me",
+    epic: "Epic 1",
+    sprint: "Sprint 1",
+    assignee: "David Brahms",
     priority: "Low",
-    dueDate: "2025-10-15",
+    created_by: "User1",
+    tags: ["bug", "low-priority"],
   },
 ];
 
