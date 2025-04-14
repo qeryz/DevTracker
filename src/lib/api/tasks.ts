@@ -26,7 +26,7 @@ const tasks = [
     status: "In Progress",
     epic: "Epic 1",
     sprint: "Sprint 1",
-    assignee: "Me",
+    assignee: "Marcos Padilla",
     priority: "Low",
     created_by: "User1",
     tags: ["feature", "urgent"],
