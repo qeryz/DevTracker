@@ -9,7 +9,7 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
   return (
-    <div className="flex flex-col bg-gray-100 rounded-lg p-4 shadow-md w-full">
+    <div className="flex flex-col bg-gray-100 rounded-lg p-4 shadow-md max-w-80">
       <h2 className="text-xl font-bold mb-4">{title}</h2>
       <div>
         {tasks.map((task, index) => (
