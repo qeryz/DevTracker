@@ -9,7 +9,18 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-4">
       <h3 className="text-lg font-semibold">{task.title}</h3>
-      <p className="text-sm text-gray-500">Assignee: {task.assignee}</p>
+      <div className="flex items-center gap-2">
+        <p className="text-sm text-gray-500">Assignee:</p>
+        <select
+          id="assignee"
+          defaultValue={task.assignee}
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto"
+        >
+          <option value="Marcos Padilla">Marcos Padilla</option>
+          <option value="Kevin Reeves">Kevin Reeves</option>
+          <option value="David Brahms">David Brahms</option>
+        </select>
+      </div>
       <p className="text-sm text-gray-500">Priority: {task.priority}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         {task.tags.map((tag, index) => (
@@ -19,13 +30,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
               index % 2 === 0
                 ? "bg-blue-100 text-blue-800"
                 : "bg-green-100 text-green-800"
-            } text-xs font-medium px-2.5 py-0.5 rounded-full`}
+            } text-xs font-bold px-2.5 py-0.5 rounded-full uppercase`}
           >
             {tag}
           </span>
         ))}
       </div>
       <div className="text-right">
+        <p className="inline-block text-right text-xs text-gray-500 uppercase cursor-default">
+          {task.epic}
+        </p>
         <span className="relative group">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png"
