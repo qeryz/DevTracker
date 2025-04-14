@@ -13,9 +13,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <p className="text-sm text-gray-500">Assignee:</p>
         <select
           id="assignee"
-          defaultValue={task.assignee}
+          defaultValue={task.assignee ?? " "}
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto"
         >
+          <option value=" " hidden>
+            {" "}
+          </option>
           <option value="Marcos Padilla">Marcos Padilla</option>
           <option value="Kevin Reeves">Kevin Reeves</option>
           <option value="David Brahms">David Brahms</option>
