@@ -1,5 +1,5 @@
 import React from "react";
-import { Task } from "@/lib/api/tasks";
+import { Task } from "@/lib/types/api/tasks";
 
 interface TaskCardProps {
   task: Task;

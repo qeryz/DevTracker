@@ -1,6 +1,6 @@
 import React from "react";
 import TaskCard from "./TaskCard";
-import { Task } from "@/lib/api/tasks";
+import { Task } from "@/lib/types/api/tasks";
 
 interface ColumnProps {
   title: string;

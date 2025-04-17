@@ -1,11 +1,11 @@
 import React from "react";
 import Column from "./Column";
-import { Task, TaskPayload } from "@/lib/api/tasks";
+import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
 interface DashboardProps {
   tasks: Task[];
   addTaskMutation: {
-    mutate: (task: TaskPayload) => void;
+    mutate: (task: TaskCreatePayload) => void;
   };
 }
 
