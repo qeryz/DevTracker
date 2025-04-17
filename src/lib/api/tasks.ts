@@ -1,3 +1,5 @@
+import axiosInstance from "./axiosInstance";
+
 export type Task = {
   id: number;
   title: string;
@@ -18,72 +20,38 @@ type UpdateTaskInput = {
   updates: Partial<TaskPayload>;
 };
 
-const tasks = [
-  {
-    id: 1,
-    title: "Task 1",
-    description: "Complete the feature",
-    status: "In Progress",
-    epic: "Epic 1",
-    sprint: "Sprint 1",
-    assignee: "Marcos Padilla",
-    priority: "Low",
-    created_by: "User1",
-    tags: ["feature", "urgent"],
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    description: "Fix the bug",
-    status: "Done",
-    epic: "Epic 1",
-    sprint: "Sprint 1",
-    assignee: "David Brahms",
-    priority: "Low",
-    created_by: "User1",
-    tags: ["bug", "low-priority"],
-  },
-];
-
-export const getTasks = (): Promise<typeof tasks | Error> => {
-  return new Promise((resolve, reject) => {
-    try {
-      setTimeout(() => resolve(tasks), 500);
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
-      reject(new Error("Failed to fetch tasks"));
-    }
-  });
+// Fetch all tasks
+export const getTasks = async (): Promise<Task[]> => {
+  try {
+    const response = await axiosInstance.get("/tasks/");
+    return response.data; // Axios automatically parses JSON
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    throw new Error("Failed to fetch tasks");
+  }
 };
 
-export const addTask = (
-  task: TaskPayload,
-): Promise<(typeof tasks)[number] | Error> => {
-  return new Promise((resolve, reject) => {
-    try {
-      const newTask = { ...task, id: tasks.length + 1 };
-      tasks.push(newTask);
-      setTimeout(() => resolve(newTask), 100); // simulate latency
-    } catch (error) {
-      reject(new Error("Failed to add task"));
-    }
-  });
+// Add a new task
+export const addTask = async (task: TaskPayload): Promise<Task> => {
+  try {
+    const response = await axiosInstance.post("/tasks/", task);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding task:", error);
+    throw new Error("Failed to add task");
+  }
 };
 
-export const updateTask = (
-  input: UpdateTaskInput,
-): Promise<(typeof tasks)[number] | undefined | Error> => {
-  return new Promise((resolve, reject) => {
-    try {
-      const task = tasks.find((task) => task.id === input.id);
-      if (task) {
-        Object.assign(task, input.updates);
-        setTimeout(() => resolve(task), 100); // Simulate latency
-      } else {
-        reject(new Error("Task not found"));
-      }
-    } catch (error) {
-      reject(new Error("Failed to update task"));
-    }
-  });
+// Update an existing task
+export const updateTask = async (input: UpdateTaskInput): Promise<Task> => {
+  try {
+    const response = await axiosInstance.patch(
+      `/tasks/${input.id}/`,
+      input.updates,
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating task:", error);
+    throw new Error("Failed to update task");
+  }
 };
