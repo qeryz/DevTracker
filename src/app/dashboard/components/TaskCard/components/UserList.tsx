@@ -23,23 +23,11 @@ const UserList = ({ task }: UserListProps) => {
   const mutation = useMutation(
     ({ id, updates }: { id: number; updates: TaskCreatePayload }) =>
       updateTask(id, updates),
-    {
-      onSuccess: () => {
-        console.log("Task updated successfully!");
-      },
-      onError: (error) => {
-        console.error("Error updating task:", error);
-      },
-    },
   );
 
   const handleAssigneeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newAssigneeId = parseInt(e.target.value, 10);
-
-    // Use the utility function to create the updated payload
     const updatedTask = mapTaskToPayload(task, { assignee: newAssigneeId });
-
-    // Make the API call to update the task
     mutation.mutate({ id: task.id, updates: updatedTask });
   };
 
@@ -52,13 +40,12 @@ const UserList = ({ task }: UserListProps) => {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <p className="text-sm text-gray-500">Assignee:</p>
+    <div className="flex items-center justify-end">
       <select
         id="assignee"
         defaultValue={task.assignee?.id ?? ""}
         onChange={handleAssigneeChange}
-        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto"
+        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto items-center hover:bg-gray-50 cursor-pointer transition-colors"
       >
         <option value="" hidden>
           Select Assignee
