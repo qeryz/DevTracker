@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery, useMutation } from "react-query";
 import { getTasks, addTask, updateTask } from "@/lib/api/tasks";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const DashboardContainer: React.FC = () => {
   const { data: tasks, isLoading, error } = useQuery("tasks", getTasks);

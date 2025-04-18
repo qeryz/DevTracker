@@ -1,5 +1,5 @@
 import React from "react";
-import Column from "./Column";
+import Column from "../Column/Column";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
 interface DashboardProps {
