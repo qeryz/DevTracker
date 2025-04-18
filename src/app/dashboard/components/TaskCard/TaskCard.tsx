@@ -1,5 +1,6 @@
 import React from "react";
 import { Task } from "@/lib/types/api/tasks";
+import UserList from "./components/UserList";
 
 interface TaskCardProps {
   task: Task;
@@ -9,21 +10,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-4">
       <h3 className="text-lg font-semibold">{task.title}</h3>
-      <div className="flex items-center gap-2">
-        <p className="text-sm text-gray-500">Assignee:</p>
-        <select
-          id="assignee"
-          defaultValue={task.assignee.first_name ?? " "}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto"
-        >
-          <option value=" " hidden>
-            {" "}
-          </option>
-          <option value="Marcos Padilla">Marcos Padilla</option>
-          <option value="Kevin Reeves">Kevin Reeves</option>
-          <option value="David Brahms">David Brahms</option>
-        </select>
-      </div>
+      <UserList task={task} />
       <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         {task.tags.map((tag, index) => (
@@ -41,7 +28,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       </div>
       <div className="text-right">
         <p className="inline-block text-right text-xs text-gray-500 uppercase cursor-default">
-          {task.epic.title}
+          {task.epic.title}-{task.id}
         </p>
         <span className="relative group">
           <img

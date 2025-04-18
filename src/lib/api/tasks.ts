@@ -24,9 +24,12 @@ export const addTask = async (task: TaskCreatePayload): Promise<Task> => {
 };
 
 // Update an existing task
-export const updateTask = async (input: Task): Promise<Task> => {
+export const updateTask = async (
+  id: number,
+  task: TaskCreatePayload,
+): Promise<Task> => {
   try {
-    const response = await axiosInstance.patch(`/tasks/${input.id}/`, input);
+    const response = await axiosInstance.put(`/tasks/${id}/`, task);
     return response.data;
   } catch (error) {
     console.error("Error updating task:", error);
