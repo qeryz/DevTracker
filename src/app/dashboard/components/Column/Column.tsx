@@ -10,7 +10,9 @@ interface ColumnProps {
 const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
   return (
     <div className="flex flex-col bg-gray-100 rounded-lg p-4 shadow-md max-w-80">
-      <h2 className="text-xl font-bold mb-4">{title}</h2>
+      <h2 className="text-sm text-gray-500 mb-4 uppercase color-gray-100">
+        {title}
+      </h2>
       <div>
         {tasks.map((task, index) => (
           <TaskCard key={index} task={task} />
