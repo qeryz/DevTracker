@@ -5,7 +5,7 @@ import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await axiosInstance.get("/tasks/");
-    return response.data; // Axios automatically parses JSON
+    return response.data;
   } catch (error) {
     console.error("Error fetching tasks:", error);
     throw new Error("Failed to fetch tasks");
