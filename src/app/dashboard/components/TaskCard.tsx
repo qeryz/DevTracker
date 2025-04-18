@@ -13,7 +13,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <p className="text-sm text-gray-500">Assignee:</p>
         <select
           id="assignee"
-          defaultValue={task.assignee ?? " "}
+          defaultValue={task.assignee.first_name ?? " "}
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto"
         >
           <option value=" " hidden>
@@ -24,7 +24,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <option value="David Brahms">David Brahms</option>
         </select>
       </div>
-      <p className="text-sm text-gray-500">Priority: {task.priority}</p>
+      <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         {task.tags.map((tag, index) => (
           <span
@@ -35,13 +35,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
                 : "bg-green-100 text-green-800"
             } text-xs font-bold px-2.5 py-0.5 rounded-full uppercase`}
           >
-            {tag}
+            {tag.name}
           </span>
         ))}
       </div>
       <div className="text-right">
         <p className="inline-block text-right text-xs text-gray-500 uppercase cursor-default">
-          {task.epic}
+          {task.epic.title}
         </p>
         <span className="relative group">
           <img
@@ -52,7 +52,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             className="inline-block rounded-full ml-2"
           />
           <span className="absolute bottom-full text-left left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-gray-700 text-white text-xs rounded px-2 py-1">
-            {task.assignee}
+            {task.assignee.first_name} {task.assignee.last_name}
           </span>
         </span>
       </div>
