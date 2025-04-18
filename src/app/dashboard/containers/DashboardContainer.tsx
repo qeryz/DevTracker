@@ -4,7 +4,13 @@ import { getTasks, addTask, updateTask } from "@/lib/api/tasks";
 import Dashboard from "../components/Dashboard/Dashboard";
 
 const DashboardContainer: React.FC = () => {
-  const { data: tasks, isLoading, error } = useQuery("tasks", getTasks);
+  const {
+    data: tasks,
+    isLoading,
+    error,
+  } = useQuery("tasks", getTasks, {
+    refetchOnWindowFocus: false,
+  });
   const addTaskMutation = useMutation(addTask);
 
   if (isLoading) return <div>Loading...</div>;
