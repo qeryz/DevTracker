@@ -1,4 +1,3 @@
-import React from "react";
 import Column from "../Column/Column";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
@@ -9,8 +8,7 @@ interface DashboardProps {
   };
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ tasks, addTaskMutation }) => {
-  // Categorize tasks by their status
+const Dashboard = ({ tasks, addTaskMutation }: DashboardProps) => {
   const toDoTasks = tasks.filter((task) => task.status.title === "To Do");
   const inProgressTasks = tasks.filter(
     (task) => task.status.title === "In Progress",
@@ -25,7 +23,6 @@ const Dashboard: React.FC<DashboardProps> = ({ tasks, addTaskMutation }) => {
       <h2 className="text-2xl font-bold mb-6">Your Tasks</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Render columns with respective tasks */}
         <Column title="To Do" tasks={toDoTasks} />
         <Column title="In Progress" tasks={inProgressTasks} />
         <Column title="In Review" tasks={inReviewTasks} />
