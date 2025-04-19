@@ -9,7 +9,7 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <div className="bg-white shadow-sm rounded-lg p-4 mb-4">
-      <h3 className="text-lg font-semibold">{task.title}</h3>
+      <h3 className="text-md font-semibold">{task.title}</h3>
       <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         <TagsList tags={task?.tags} />
