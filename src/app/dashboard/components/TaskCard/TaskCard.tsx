@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Task } from "@/lib/types/api/tasks";
+import { DefaultAvatar, TagsList } from "@/app/components";
 import UserList from "./components/UserList";
 
 interface TaskCardProps {
@@ -14,32 +15,15 @@ const TaskCard = ({ task }: TaskCardProps) => {
       <h3 className="text-lg font-semibold">{task.title}</h3>
       <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
-        {task.tags.map((tag, index) => (
-          <span
-            key={index}
-            className={`${
-              index % 2 === 0
-                ? "bg-blue-100 text-blue-800"
-                : "bg-green-100 text-green-800"
-            } text-xs font-bold px-2.5 py-0.5 rounded-full uppercase`}
-          >
-            {tag.name}
-          </span>
-        ))}
+        <TagsList tags={task?.tags} />
       </div>
       <div className="text-right">
-        <p className="inline-block text-right text-xs text-gray-500 uppercase cursor-default">
+        <p className="inline-block text-right text-xs text-gray-500 uppercase cursor-default mr-2">
           {task.epic.title}-{task.id}
         </p>
         <span className="relative group">
           <button onClick={() => setIsFocused((prev) => !prev)}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png"
-              alt="avatar"
-              width={20}
-              height={20}
-              className="inline-block rounded-full ml-2 cursor-pointer"
-            />
+            <DefaultAvatar height={20} width={20} />
           </button>
           <span
             className={`absolute bottom-full text-left left-1/2 -translate-x-1/2 mb-1 hidden group-hover:${

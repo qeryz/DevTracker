@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-const LogoutButton = () => {
+export const LogoutButton = () => {
   const router = useRouter();
 
   const handleLogout = () => {
@@ -19,5 +19,3 @@ const LogoutButton = () => {
     </button>
   );
 };
-
-export default LogoutButton;
