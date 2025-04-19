@@ -1,3 +1,6 @@
+import twitterDefaultAvatar from "@/assets/Twitter_default_profile.png";
+import Image from "next/image";
+
 interface DefaultAvatarProps {
   height: number;
   width: number;
@@ -5,8 +8,8 @@ interface DefaultAvatarProps {
 
 export const DefaultAvatar = ({ height, width }: DefaultAvatarProps) => {
   return (
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png"
+    <Image
+      src={twitterDefaultAvatar.src}
       alt="avatar"
       width={width}
       height={height}
