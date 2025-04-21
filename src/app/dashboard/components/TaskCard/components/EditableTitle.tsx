@@ -71,14 +71,14 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
               type="submit"
               className="text-green-500 hover:text-green-700"
             >
-              <CheckIcon className="w-4 h-4" />
+              <CheckIcon className="w-4 h-4 cursor-pointer" />
             </button>
             <button
               type="button"
               onClick={handleCancel}
               className="text-red-500 hover:text-red-700"
             >
-              <XMarkIcon className="w-4 h-4" />
+              <XMarkIcon className="w-4 h-4 cursor-pointer" />
             </button>
           </div>
           {errors.title && (
