@@ -21,7 +21,6 @@ const UserList = ({ task }: UserListProps) => {
   });
 
   const queryClient = useQueryClient();
-
   const mutation = useMutation(
     ({ id, updates }: { id: number; updates: TaskCreatePayload }) =>
       updateTask(id, updates),
