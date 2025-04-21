@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   CheckIcon,
   XMarkIcon,
@@ -7,17 +10,16 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
-import { mapTaskToPayload } from "./utility";
-import { z } from "zod";
+import { mapTaskToPayload, titleSchema } from "./utility";
 
 interface EditableTitleProps {
   task: Task;
 }
 
+type TitleFormValues = z.infer<typeof titleSchema>;
+
 const EditableTitle = ({ task }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState(task.title);
-  const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -30,65 +32,63 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
     },
   );
 
-  const titleSchema = z
-    .string()
-    .min(3, "Title must be at least 3 characters")
-    .max(50, "Title cannot exceed 50 characters");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<TitleFormValues>({
+    defaultValues: { title: task.title },
+    resolver: zodResolver(titleSchema),
+  });
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleCancelClick = () => {
+  const handleSave = (data: TitleFormValues) => {
+    const updatedTask = mapTaskToPayload(task, { title: data.title });
+    mutation.mutate({ id: task.id, updates: updatedTask });
     setIsEditing(false);
-    setNewTitle(task.title);
-    setError(null);
   };
 
-  const handleSaveClick = () => {
-    try {
-      titleSchema.parse(newTitle);
-      const updatedTask = mapTaskToPayload(task, { title: newTitle });
-      mutation.mutate({ id: task.id, updates: updatedTask });
-      setIsEditing(false);
-      setError(null);
-    } catch (validationError) {
-      if (validationError instanceof z.ZodError) {
-        setError(validationError.errors[0].message); // Set the first validation error
-      }
-    }
+  const handleCancel = () => {
+    setIsEditing(false);
+    reset({ title: task.title });
   };
 
   return (
     <h3 className="flex text-md font-medium items-start">
       {isEditing ? (
-        <div className="flex flex-col gap-2">
+        <form
+          onSubmit={handleSubmit(handleSave)}
+          className="flex flex-col gap-2"
+        >
           <div className="flex items-center gap-2">
             <input
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              className="border rounded px-2 py-1 text-sm"
+              {...register("title")}
+              className={`border rounded px-2 py-1 text-sm ${
+                errors.title ? "border-red-500" : ""
+              }`}
             />
             <button
-              onClick={handleSaveClick}
+              type="submit"
               className="text-green-500 hover:text-green-700"
             >
               <CheckIcon className="w-4 h-4" />
             </button>
             <button
-              onClick={handleCancelClick}
+              type="button"
+              onClick={handleCancel}
               className="text-red-500 hover:text-red-700"
             >
               <XMarkIcon className="w-4 h-4" />
             </button>
           </div>
-          {error && <p className="text-xs text-red-500">{error}</p>}
-        </div>
+          {errors.title && (
+            <p className="text-xs text-red-500">{errors.title.message}</p>
+          )}
+        </form>
       ) : (
         <>
           {task.title}
-          <button onClick={handleEditClick} className="cursor-pointer">
+          <button onClick={() => setIsEditing(true)} className="cursor-pointer">
             <PencilSquareIcon className="inline-block w-4 h-4 ml-2 mb-1 flex-shrink-0 text-gray-500 hover:text-gray-700 transition-colors" />
           </button>
         </>
