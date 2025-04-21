@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { mapTaskToPayload } from "./utility";
+import { z } from "zod";
 
 interface EditableTitleProps {
   task: Task;
@@ -16,6 +17,7 @@ interface EditableTitleProps {
 const EditableTitle = ({ task }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(task.title);
+  const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -28,43 +30,60 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
     },
   );
 
+  const titleSchema = z
+    .string()
+    .min(3, "Title must be at least 3 characters")
+    .max(50, "Title cannot exceed 50 characters");
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
-    setNewTitle(task.title); // Reset to original title
+    setNewTitle(task.title);
+    setError(null);
   };
 
   const handleSaveClick = () => {
-    const updatedTask = mapTaskToPayload(task, { title: newTitle });
-    mutation.mutate({ id: task.id, updates: updatedTask });
-    setIsEditing(false);
+    try {
+      titleSchema.parse(newTitle);
+      const updatedTask = mapTaskToPayload(task, { title: newTitle });
+      mutation.mutate({ id: task.id, updates: updatedTask });
+      setIsEditing(false);
+      setError(null);
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        setError(validationError.errors[0].message); // Set the first validation error
+      }
+    }
   };
 
   return (
     <h3 className="flex text-md font-medium items-start">
       {isEditing ? (
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            className="border rounded px-2 py-1 text-sm"
-          />
-          <button
-            onClick={handleSaveClick}
-            className="text-green-500 hover:text-green-700"
-          >
-            <CheckIcon className="w-4 h-4" />
-          </button>
-          <button
-            onClick={handleCancelClick}
-            className="text-red-500 hover:text-red-700"
-          >
-            <XMarkIcon className="w-4 h-4" />
-          </button>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              className="border rounded px-2 py-1 text-sm"
+            />
+            <button
+              onClick={handleSaveClick}
+              className="text-green-500 hover:text-green-700"
+            >
+              <CheckIcon className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleCancelClick}
+              className="text-red-500 hover:text-red-700"
+            >
+              <XMarkIcon className="w-4 h-4" />
+            </button>
+          </div>
+          {error && <p className="text-xs text-red-500">{error}</p>}
         </div>
       ) : (
         <>
