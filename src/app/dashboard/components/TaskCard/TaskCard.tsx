@@ -1,5 +1,6 @@
 import { Task } from "@/lib/types/api/tasks";
 import { TagsList } from "@/app/components";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import AssigneeSection from "./components/AssigneeSection";
 
 interface TaskCardProps {
@@ -9,7 +10,10 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <div className="bg-white shadow-sm rounded-lg p-4 mb-4">
-      <h3 className="text-md font-semibold">{task.title}</h3>
+      <h3 className="flex text-md font-semibold items-start">
+        {task.title}
+        <PencilSquareIcon className="inline-block w-4 h-4 ml-2 mt-0.5 flex-shrink-0 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors " />
+      </h3>
       <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         <TagsList tags={task?.tags} />
