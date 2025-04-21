@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getUsers } from "@/lib/api/users";
 import { updateTask } from "@/lib/api/tasks";
 import { User } from "@/lib/types/api/users";
@@ -20,9 +20,16 @@ const UserList = ({ task }: UserListProps) => {
     refetchOnWindowFocus: false,
   });
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation(
     ({ id, updates }: { id: number; updates: TaskCreatePayload }) =>
       updateTask(id, updates),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("tasks");
+      },
+    },
   );
 
   const handleAssigneeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
