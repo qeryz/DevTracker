@@ -14,12 +14,17 @@ import { mapTaskToPayload, titleSchema } from "./utility";
 
 interface EditableTitleProps {
   task: Task;
+  setIsEditing: (isEditing: boolean) => void;
+  isEditing: boolean;
 }
 
 type TitleFormValues = z.infer<typeof titleSchema>;
 
-const EditableTitle = ({ task }: EditableTitleProps) => {
-  const [isEditing, setIsEditing] = useState(false);
+const EditableTitle = ({
+  task,
+  setIsEditing,
+  isEditing,
+}: EditableTitleProps) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
