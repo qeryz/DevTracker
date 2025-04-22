@@ -17,6 +17,7 @@ import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { updateTask } from "@/lib/api/tasks";
 import { useMutation, useQueryClient } from "react-query";
 import { mapTaskToPayload } from "../TaskCard/components/utils";
+import { statusMap } from "./utils";
 import { useState } from "react";
 
 interface DashboardProps {
@@ -25,13 +26,6 @@ interface DashboardProps {
     mutate: (task: TaskCreatePayload) => void;
   };
 }
-
-const statusMap: Record<string, number> = {
-  "To Do": 1,
-  "In Progress": 2,
-  "In Review": 3,
-  Done: 4,
-};
 
 const Dashboard = ({ tasks, addTaskMutation }: DashboardProps) => {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
