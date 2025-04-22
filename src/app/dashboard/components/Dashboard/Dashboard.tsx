@@ -16,7 +16,7 @@ import TaskCard from "../TaskCard/TaskCard"; // Import TaskCard for DragOverlay
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { updateTask } from "@/lib/api/tasks";
 import { useMutation, useQueryClient } from "react-query";
-import { mapTaskToPayload } from "../TaskCard/components/utility";
+import { mapTaskToPayload } from "../TaskCard/components/utils";
 import { useState } from "react";
 
 interface DashboardProps {

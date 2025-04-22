@@ -10,7 +10,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
-import { mapTaskToPayload, titleSchema } from "./utility";
+import { mapTaskToPayload, titleSchema } from "./utils";
 
 interface EditableTitleProps {
   task: Task;

@@ -5,7 +5,7 @@ import { getUsers } from "@/lib/api/users";
 import { updateTask } from "@/lib/api/tasks";
 import { User } from "@/lib/types/api/users";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
-import { mapTaskToPayload } from "./utility";
+import { mapTaskToPayload } from "./utils";
 
 interface UserListProps {
   task: Task;
