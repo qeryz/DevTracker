@@ -1,24 +1,67 @@
-export const mockLogin = async (username: string, password: string) => {
-  // Replace with API call when Kevin's BE is ready
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
-  if (username === "admin" && password === "pass") {
-    const token = "mock-jwt-token"; // Mock JWT
-    console.log("Login successful, token generated:", token);
-    // Set token as a cookie
+import axiosInstance from "./axiosInstance";
+
+export const login = async (username: string, password: string) => {
+  try {
+    const response = await axiosInstance.post("/token/", {
+      username,
+      password,
+    });
+
+    const { access, refresh } = response.data;
+
+    // Store tokens in cookies (client-side only)
+    // Note: For prod we would use httpOnly cookies
     if (typeof document !== "undefined") {
-      document.cookie = `token=${token}; path=/; max-age=3600; SameSite=Strict;`;
+      document.cookie = `access=${access}; path=/; max-age=3600; SameSite=Strict;`;
+      document.cookie = `refresh=${refresh}; path=/; max-age=604800; SameSite=Strict;`; // 7 days
     }
-    return { token };
+
+    return { access, refresh };
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw new Error("Invalid credentials");
   }
-  throw new Error("Invalid credentials");
 };
 
-export const getToken = () => {
-  // Retrieve the token from cookies
+export const refreshAccessToken = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post("/token/refresh/", {
+      refresh: refreshToken,
+    });
+
+    const { access } = response.data;
+
+    if (typeof document !== "undefined") {
+      document.cookie = `access=${access}; path=/; max-age=3600; SameSite=Strict;`;
+    }
+
+    return access;
+  } catch (error) {
+    console.error("Failed to refresh access token:", error);
+    throw error;
+  }
+};
+
+export const verifyAccessToken = async (token: string) => {
+  try {
+    await axiosInstance.post("/token/verify/", {
+      token,
+    });
+    return true;
+  } catch (error) {
+    console.error("Access token verification failed:", error);
+    throw new Error("Access token is invalid or expired");
+  }
+};
+
+export const getCookie = (name: string) => {
   if (typeof document !== "undefined") {
     const cookies = document.cookie.split("; ");
-    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-    return tokenCookie ? tokenCookie.split("=")[1] : null;
+    const cookie = cookies.find((c) => c.startsWith(`${name}=`));
+    return cookie ? cookie.split("=")[1] : null;
   }
   return null;
 };
+
+export const getAccessToken = () => getCookie("access");
+export const getRefreshToken = () => getCookie("refresh");
