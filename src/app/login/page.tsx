@@ -1,15 +1,22 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import LoginForm from "./components/LoginForm"; // Ensure the path is correct
+import LoginForm from "./components/LoginForm";
+import { verifyAccessToken } from "@/lib/api/auth";
 
 const LoginPage = async () => {
-  const cookieStore = await cookies(); // Synchronous call
-  const token = cookieStore.get("token");
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access")?.value;
 
-  if (token) {
-    console.log("Token found, redirecting to dashboard:", token.value);
-    redirect("/dashboard"); // Redirect to the dashboard if the token exists
+  let isValid = false;
+
+  if (accessToken) {
+    try {
+      isValid = await verifyAccessToken(accessToken);
+    } catch (error) {
+      console.error("Access token is invalid or expired:", error);
+    }
   }
+  if (isValid) redirect("/dashboard"); // Redirect to the dashboard if the token is valid
 
   return <LoginForm />;
 };
