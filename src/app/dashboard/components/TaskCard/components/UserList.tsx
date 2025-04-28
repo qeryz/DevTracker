@@ -48,7 +48,7 @@ const UserList = ({ task }: UserListProps) => {
   return (
     <div className="flex items-center justify-end">
       <select
-        id="assignee"
+        id={`assignee-${task.id}`}
         defaultValue={task.assignee?.id ?? ""}
         onChange={handleAssigneeChange}
         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-1.5 w-auto items-center hover:bg-gray-50 cursor-pointer transition-colors"
