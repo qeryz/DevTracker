@@ -1,25 +1,17 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { getUsers } from "@/lib/api/users";
+import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
-import { User } from "@/lib/types/api/users";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { mapTaskToPayload } from "./utils";
+import useUsersStore from "@/store/useUsersStore";
 
 interface UserListProps {
   task: Task;
 }
 
 const UserList = ({ task }: UserListProps) => {
-  const {
-    data: users,
-    isLoading,
-    error,
-  } = useQuery<User[]>("users", getUsers, {
-    refetchOnWindowFocus: false,
-  });
-
+  const { users } = useUsersStore((state) => state);
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ({ id, updates }: { id: number; updates: TaskCreatePayload }) =>
@@ -36,14 +28,6 @@ const UserList = ({ task }: UserListProps) => {
     const updatedTask = mapTaskToPayload(task, { assignee: newAssigneeId });
     mutation.mutate({ id: task.id, updates: updatedTask });
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: Failed to fetch users</div>;
-  }
 
   return (
     <div className="flex items-center justify-end">
