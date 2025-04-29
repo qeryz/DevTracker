@@ -12,23 +12,20 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import Column from "../Column/Column";
-import TaskCard from "../TaskCard/TaskCard"; // Import TaskCard for DragOverlay
-import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
-import { updateTask } from "@/lib/api/tasks";
+import TaskCard from "../TaskCard/TaskCard";
 import { useMutation, useQueryClient } from "react-query";
+import { addTask, updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload } from "../TaskCard/components/utils";
 import { statusMap } from "./utils";
 import { useState } from "react";
+import useTaskStore from "@/store/useTaskStore";
+import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
-interface DashboardProps {
-  tasks: Task[];
-  addTaskMutation: {
-    mutate: (task: TaskCreatePayload) => void;
-  };
-}
-
-const Dashboard = ({ tasks, addTaskMutation }: DashboardProps) => {
+const Dashboard = () => {
+  const { tasks } = useTaskStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+  const addTaskMutation = useMutation(addTask);
 
   const queryClient = useQueryClient();
   const updateTaskMutation = useMutation(

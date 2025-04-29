@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { TagsList } from "@/app/components";
 import AssigneeSection from "./components/AssigneeSection";
 import EditableTitle from "./components/EditableTitle";
 import { Task } from "@/lib/types/api/tasks";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import useTaskStore from "@/store/useTaskStore";
 
 interface TaskCardProps {
   task: Task;
 }
 
 const TaskCard = ({ task }: TaskCardProps) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const { isEditing, setIsEditing } = useTaskStore();
   const {
     attributes,
     listeners,
@@ -35,11 +35,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
       {...listeners}
       className="bg-white shadow-sm rounded-lg p-4 mb-4"
     >
-      <EditableTitle
-        task={task}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-      />
+      <EditableTitle task={task} />
       <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
       <div className="flex flex-wrap gap-2 mt-2">
         <TagsList tags={task?.tags} />

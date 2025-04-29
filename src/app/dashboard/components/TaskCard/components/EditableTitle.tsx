@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,20 +10,16 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { mapTaskToPayload, titleSchema } from "./utils";
+import useTaskStore from "@/store/useTaskStore";
 
 interface EditableTitleProps {
   task: Task;
-  setIsEditing: (isEditing: boolean) => void;
-  isEditing: boolean;
 }
 
 type TitleFormValues = z.infer<typeof titleSchema>;
 
-const EditableTitle = ({
-  task,
-  setIsEditing,
-  isEditing,
-}: EditableTitleProps) => {
+const EditableTitle = ({ task }: EditableTitleProps) => {
+  const { isEditing, setIsEditing } = useTaskStore();
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -32,7 +27,7 @@ const EditableTitle = ({
       updateTask(id, updates),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("tasks"); // Refresh tasks data
+        queryClient.invalidateQueries("tasks");
       },
     },
   );

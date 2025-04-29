@@ -1,12 +1,14 @@
 import { useQuery, useMutation } from "react-query";
-import { getTasks, addTask, updateTask } from "@/lib/api/tasks";
+import { getTasks, addTask } from "@/lib/api/tasks";
 import Dashboard from "../components/Dashboard/Dashboard";
+import useTaskStore from "@/store/useTaskStore";
 
 const DashboardContainer = () => {
+  const { setTasks } = useTaskStore();
   const { data: tasks, isLoading } = useQuery("tasks", getTasks, {
     refetchOnWindowFocus: false,
+    onSuccess: (data) => setTasks(data || []),
   });
-  const addTaskMutation = useMutation(addTask);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -15,7 +17,7 @@ const DashboardContainer = () => {
     return <div>Error: {tasks.message}</div>;
   }
 
-  return <Dashboard tasks={tasks || []} addTaskMutation={addTaskMutation} />;
+  return <Dashboard />;
 };
 
 export default DashboardContainer;
