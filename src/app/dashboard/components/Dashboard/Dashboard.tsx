@@ -7,10 +7,6 @@ import {
   useSensors,
   PointerSensor,
 } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import Column from "../Column/Column";
 import TaskCard from "../TaskCard/TaskCard";
 import TaskForm from "../TaskForm/TaskForm";
@@ -39,8 +35,6 @@ const Dashboard = () => {
     },
   );
 
-  const allTaskIds = tasks.map((task) => task.id);
-
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -65,7 +59,14 @@ const Dashboard = () => {
     const activeTask = tasks.find((task) => task.id === active.id);
     if (!activeTask) return;
 
-    const newStatusId = statusMap[over.id];
+    // Ensure `over.id` corresponds to the column's ID
+    const overId = statuses.find((status) => status.title === over.id)
+      ? over.id
+      : tasks.find((task) => task.id === over.id)?.status.title;
+
+    const newStatusId = overId
+      ? statuses.find((status) => status.title === overId)?.id
+      : undefined;
     if (!newStatusId || activeTask.status.id === newStatusId) return;
 
     try {
@@ -87,25 +88,20 @@ const Dashboard = () => {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext
-          items={allTaskIds}
-          strategy={verticalListSortingStrategy}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {statuses.map((status) => {
-              const filteredTasks = tasks.filter(
-                (task) => task.status.id === status.id,
-              );
-              return (
-                <Column
-                  key={status.id}
-                  title={status.title}
-                  tasks={filteredTasks}
-                />
-              );
-            })}
-          </div>
-        </SortableContext>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {statuses.map((status) => {
+            const filteredTasks = tasks.filter(
+              (task) => task.status.id === status.id,
+            );
+            return (
+              <Column
+                key={status.id}
+                title={status.title}
+                tasks={filteredTasks}
+              />
+            );
+          })}
+        </div>
 
         {/* DragOverlay to keep the dragged item visible */}
         <DragOverlay>
