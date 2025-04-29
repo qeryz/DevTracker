@@ -13,7 +13,6 @@ import TaskForm from "../TaskForm/TaskForm";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload } from "../TaskCard/components/utils";
-import { statusMap } from "./utils";
 import { useState } from "react";
 import useTaskStore from "@/store/useTaskStore";
 import useStatusStore from "@/store/useStatusStore";
