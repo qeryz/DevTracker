@@ -1,20 +1,39 @@
-import { useQuery, useMutation } from "react-query";
-import { getTasks, addTask } from "@/lib/api/tasks";
+import { useQuery } from "react-query";
+import { getTasks } from "@/lib/api/tasks";
+import { getStatuses } from "@/lib/api/status";
 import Dashboard from "../components/Dashboard/Dashboard";
 import useTaskStore from "@/store/useTaskStore";
+import useStatusStore from "@/store/useStatusStore";
 
 const DashboardContainer = () => {
   const { setTasks } = useTaskStore();
-  const { data: tasks, isLoading } = useQuery("tasks", getTasks, {
+  const { setStatuses } = useStatusStore();
+
+  const { data: tasks, isLoading: tasksLoading } = useQuery("tasks", getTasks, {
     refetchOnWindowFocus: false,
     onSuccess: (data) => setTasks(data || []),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  const { data: statuses, isLoading: statusesLoading } = useQuery(
+    "statuses",
+    getStatuses,
+    {
+      refetchOnWindowFocus: false,
+      onSuccess: (data) => setStatuses(data || []),
+    },
+  );
 
-  if (tasks instanceof Error) {
-    console.error("Error fetching tasks:", tasks.message);
-    return <div>Error: {tasks.message}</div>;
+  if (tasksLoading || statusesLoading) return <div>Loading...</div>;
+
+  if (tasks instanceof Error || statuses instanceof Error) {
+    const error =
+      tasks instanceof Error
+        ? tasks
+        : statuses instanceof Error
+          ? statuses
+          : null;
+    console.error("Error fetching data:", error?.message || "Unknown error");
+    return <div>Error: {error?.message || "Unknown error"}</div>;
   }
 
   return <Dashboard />;

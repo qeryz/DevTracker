@@ -19,13 +19,19 @@ import { mapTaskToPayload } from "../TaskCard/components/utils";
 import { statusMap } from "./utils";
 import { useState } from "react";
 import useTaskStore from "@/store/useTaskStore";
+import useStatusStore from "@/store/useStatusStore";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
 const Dashboard = () => {
   const { tasks } = useTaskStore();
+  const { statuses } = useStatusStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
-  const addTaskMutation = useMutation(addTask);
+  const addTaskMutation = useMutation(addTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("tasks");
+    },
+  });
 
   const queryClient = useQueryClient();
   const updateTaskMutation = useMutation(
@@ -37,15 +43,6 @@ const Dashboard = () => {
       },
     },
   );
-
-  const toDoTasks = tasks.filter((task) => task.status.title === "To Do");
-  const inProgressTasks = tasks.filter(
-    (task) => task.status.title === "In Progress",
-  );
-  const inReviewTasks = tasks.filter(
-    (task) => task.status.title === "In Review",
-  );
-  const doneTasks = tasks.filter((task) => task.status.title === "Done");
 
   const allTaskIds = tasks.map((task) => task.id);
 
@@ -100,10 +97,18 @@ const Dashboard = () => {
           strategy={verticalListSortingStrategy}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Column title="To Do" tasks={toDoTasks} />
-            <Column title="In Progress" tasks={inProgressTasks} />
-            <Column title="In Review" tasks={inReviewTasks} />
-            <Column title="Done" tasks={doneTasks} />
+            {statuses.map((status) => {
+              const filteredTasks = tasks.filter(
+                (task) => task.status.id === status.id,
+              );
+              return (
+                <Column
+                  key={status.id}
+                  title={status.title}
+                  tasks={filteredTasks}
+                />
+              );
+            })}
           </div>
         </SortableContext>
 
