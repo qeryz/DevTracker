@@ -45,17 +45,17 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
   const handleSave = (data: TitleFormValues) => {
     const updatedTask = mapTaskToPayload(task, { title: data.title });
     mutation.mutate({ id: task.id, updates: updatedTask });
-    setIsEditing(false);
+    setIsEditing(task.id, false);
   };
 
   const handleCancel = () => {
-    setIsEditing(false);
+    setIsEditing(task.id, false);
     reset({ title: task.title });
   };
 
   return (
     <h3 className="flex text-md font-medium items-start">
-      {isEditing ? (
+      {isEditing[task.id] ? (
         <form
           onSubmit={handleSubmit(handleSave)}
           className="flex flex-col gap-2"
@@ -88,7 +88,10 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
       ) : (
         <>
           {task.title}
-          <button onClick={() => setIsEditing(true)} className="cursor-pointer">
+          <button
+            onClick={() => setIsEditing(task.id, true)}
+            className="cursor-pointer"
+          >
             <PencilSquareIcon className="inline-block w-4 h-4 ml-2 mb-1 flex-shrink-0 text-gray-500 hover:text-gray-700 transition-colors" />
           </button>
         </>
