@@ -13,8 +13,9 @@ import {
 } from "@dnd-kit/sortable";
 import Column from "../Column/Column";
 import TaskCard from "../TaskCard/TaskCard";
+import TaskForm from "../TaskForm/TaskForm";
 import { useMutation, useQueryClient } from "react-query";
-import { addTask, updateTask } from "@/lib/api/tasks";
+import { updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload } from "../TaskCard/components/utils";
 import { statusMap } from "./utils";
 import { useState } from "react";
@@ -26,12 +27,6 @@ const Dashboard = () => {
   const { tasks } = useTaskStore();
   const { statuses } = useStatusStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
-
-  const addTaskMutation = useMutation(addTask, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("tasks");
-    },
-  });
 
   const queryClient = useQueryClient();
   const updateTaskMutation = useMutation(
@@ -117,25 +112,7 @@ const Dashboard = () => {
           {activeTask ? <TaskCard task={activeTask} /> : null}
         </DragOverlay>
       </DndContext>
-
-      <button
-        onClick={() =>
-          addTaskMutation.mutate({
-            title: "New Task",
-            description: "Description",
-            status: 1,
-            assignee: 1,
-            priority: 1,
-            epic: 1,
-            sprint: 1,
-            tags: [1],
-            created_by: 1,
-          })
-        }
-        className="mt-6 bg-blue-500 text-white py-2 px-4 rounded"
-      >
-        Add Task
-      </button>
+      <TaskForm />
     </div>
   );
 };
