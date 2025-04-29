@@ -11,7 +11,7 @@ interface TaskCardProps {
 }
 
 const TaskCard = ({ task }: TaskCardProps) => {
-  const { isEditing, setIsEditing } = useTaskStore();
+  const { isEditing } = useTaskStore();
   const {
     attributes,
     listeners,
