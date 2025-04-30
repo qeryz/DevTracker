@@ -5,10 +5,10 @@ interface TaskStore {
   tasks: Task[];
   isEditing: Record<number, boolean>;
   filter: {
-    assignee?: number;
-    sprint?: number;
-    status?: number;
-    priority?: number;
+    assignee?: number[];
+    sprint?: number[];
+    status?: number[];
+    priority?: number[];
   };
   setTasks: (tasks: Task[]) => void;
   setIsEditing: (taskId: number, isEditing: boolean) => void;
@@ -30,11 +30,19 @@ const useTaskStore = create<TaskStore>((set) => ({
       const newFilter = { ...state.filter };
 
       (Object.keys(filter) as Array<keyof typeof newFilter>).forEach((key) => {
-        if (newFilter[key] === filter[key]) {
-          delete newFilter[key];
-        } else {
-          newFilter[key] = filter[key];
-        }
+        const currentValues = newFilter[key] || [];
+        const incomingValues = filter[key] || [];
+
+        // Toggle each value in incomingValues
+        incomingValues.forEach((value) => {
+          if (currentValues.includes(value)) {
+            // Remove the value if it exists
+            newFilter[key] = currentValues.filter((v) => v !== value);
+          } else {
+            // Add the value if it doesn't exist
+            newFilter[key] = [...currentValues, value];
+          }
+        });
       });
 
       return { filter: newFilter };

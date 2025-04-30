@@ -10,16 +10,17 @@ import {
 import Column from "../Column/Column";
 import TaskCard from "../TaskCard/TaskCard";
 import TaskForm from "../TaskForm/TaskForm";
+import FilterButton from "@/app/components/FilterButton";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload } from "../TaskCard/components/utils";
 import { useState } from "react";
 import useTaskStore from "@/store/useTaskStore";
-import useStatusStore from "@/store/useStatusStore";
+import useStatusStore from "@/store/useMiscStore";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 
 const Dashboard = () => {
-  const { tasks } = useTaskStore();
+  const { tasks, filter } = useTaskStore();
   const { statuses } = useStatusStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
@@ -79,9 +80,23 @@ const Dashboard = () => {
     }
   };
 
+  // Apply filters to tasks
+  const filteredTasks = tasks.filter((task) => {
+    if (filter.assignee?.length && !filter.assignee.includes(task.assignee.id))
+      return false;
+    if (filter.sprint?.length && !filter.sprint.includes(task.sprint.id))
+      return false;
+    if (filter.status?.length && !filter.status.includes(task.status.id))
+      return false;
+    if (filter.priority?.length && !filter.priority.includes(task.priority.id))
+      return false;
+    return true;
+  });
+
   return (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-6">Your Tasks</h2>
+      <FilterButton />
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
@@ -89,14 +104,14 @@ const Dashboard = () => {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {statuses.map((status) => {
-            const filteredTasks = tasks.filter(
+            const tasksForStatus = filteredTasks.filter(
               (task) => task.status.id === status.id,
             );
             return (
               <Column
                 key={status.id}
                 title={status.title}
-                tasks={filteredTasks}
+                tasks={tasksForStatus}
               />
             );
           })}

@@ -2,17 +2,25 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import { useTasks } from "@/hooks/useTasks";
 import { useStatuses } from "@/hooks/useStatuses";
 import { useUsers } from "@/hooks/useUsers";
+import { usePriorities } from "@/hooks/usePriorities";
 
 const DashboardContainer = () => {
   const { isLoading: tasksLoading, error: tasksError } = useTasks();
   const { isLoading: statusesLoading, error: statusesError } = useStatuses();
   const { isLoading: usersLoading, error: usersError } = useUsers();
+  const { isLoading: prioritiesLoading, error: prioritiesError } =
+    usePriorities();
 
-  if (tasksLoading || statusesLoading || usersLoading) {
+  if (tasksLoading || statusesLoading || usersLoading || prioritiesLoading) {
     return <div>Loading...</div>;
   }
 
-  const errors = [tasksError, statusesError, usersError];
+  const errors = [
+    tasksError,
+    statusesError,
+    usersError,
+    prioritiesError,
+  ].filter(Boolean);
   const firstError = errors.find((error) => error instanceof Error);
 
   if (firstError) {
