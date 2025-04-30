@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 import { getStatuses } from "@/lib/api/status";
-import useStatusStore from "@/store/useStatusStore";
+import useMiscStore from "@/store/useMiscStore";
 
 export const useStatuses = () => {
-  const { setStatuses } = useStatusStore();
+  const { setStatuses } = useMiscStore();
 
   return useQuery("statuses", getStatuses, {
     refetchOnWindowFocus: false,
