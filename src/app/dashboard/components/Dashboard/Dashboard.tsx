@@ -10,7 +10,7 @@ import {
 import Column from "../Column/Column";
 import TaskCard from "../TaskCard/TaskCard";
 import TaskForm from "../TaskForm/TaskForm";
-import FilterButton from "@/app/components/FilterButton";
+import FilterButton from "@/app/components/FilterButton/FilterButton";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload } from "../TaskCard/components/utils";

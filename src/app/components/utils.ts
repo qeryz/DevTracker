@@ -23,6 +23,8 @@ export const filterTypes = [
   "priority",
 ] as const;
 
+export type FilterType = (typeof filterTypes)[number];
+
 export const getFilterOptions = (
   type: string,
   users: User[],
