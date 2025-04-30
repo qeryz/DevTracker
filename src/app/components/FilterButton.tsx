@@ -3,7 +3,7 @@ import useTaskStore from "@/store/useTaskStore";
 import useMiscStore from "@/store/useMiscStore";
 import useUsersStore from "@/store/useUsersStore";
 import { Sprint } from "@/lib/types/api/tasks";
-import { filterTypes, returnUniqueSprints } from "./utils";
+import { filterTypes, returnUniqueSprints, getFilterOptions } from "./utils";
 
 const FilterButton = () => {
   const { tasks, filter, setFilter, resetFilter } = useTaskStore();
@@ -67,77 +67,37 @@ const FilterButton = () => {
 
           {/* Right Panel */}
           <div className="flex-1 pl-4">
-            {activeFilter === "assignee" && (
+            {activeFilter && (
               <div>
-                <h4 className="text-sm font-bold mb-2">Select Assignee</h4>
+                <h4 className="text-sm font-bold mb-2">
+                  Select{" "}
+                  {activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)}
+                </h4>
                 <div className="flex flex-col gap-2">
-                  {users.map((user) => (
+                  {getFilterOptions(
+                    activeFilter,
+                    users,
+                    uniqueSprints,
+                    statuses,
+                    priorities,
+                  ).map((option) => (
                     <button
-                      key={user.id}
-                      onClick={() => handleFilterChange("assignee", user.id)}
-                      className={`text-gray-700 hover:text-blue-500 ${
-                        filter.assignee?.includes(user.id) ? "font-bold" : ""
-                      }`}
-                    >
-                      {user.first_name} {user.last_name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {activeFilter === "sprint" && (
-              <div>
-                <h4 className="text-sm font-bold mb-2">Select Sprint</h4>
-                <div className="flex flex-col gap-2">
-                  {uniqueSprints.map((sprint) => (
-                    <button
-                      key={sprint.id}
-                      onClick={() => handleFilterChange("sprint", sprint.id)}
-                      className={`text-gray-700 hover:text-blue-500 ${
-                        filter.sprint?.includes(sprint.id) ? "font-bold" : ""
-                      }`}
-                    >
-                      {sprint.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {activeFilter === "status" && (
-              <div>
-                <h4 className="text-sm font-bold mb-2">Select Status</h4>
-                <div className="flex flex-col gap-2">
-                  {statuses.map((status) => (
-                    <button
-                      key={status.id}
-                      onClick={() => handleFilterChange("status", status.id)}
-                      className={`text-gray-700 hover:text-blue-500 ${
-                        filter.status?.includes(status.id) ? "font-bold" : ""
-                      }`}
-                    >
-                      {status.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {activeFilter === "priority" && (
-              <div>
-                <h4 className="text-sm font-bold mb-2">Select Priority</h4>
-                <div className="flex flex-col gap-2">
-                  {priorities.map((priority) => (
-                    <button
-                      key={priority.id}
+                      key={option.id}
                       onClick={() =>
-                        handleFilterChange("priority", priority.id)
+                        handleFilterChange(
+                          activeFilter as keyof typeof filter,
+                          option.id,
+                        )
                       }
                       className={`text-gray-700 hover:text-blue-500 ${
-                        filter.priority?.includes(priority.id)
+                        filter[activeFilter as keyof typeof filter]?.includes(
+                          option.id,
+                        )
                           ? "font-bold"
                           : ""
                       }`}
                     >
-                      {priority.title}
+                      {option.label}
                     </button>
                   ))}
                 </div>
