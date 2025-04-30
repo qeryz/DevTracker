@@ -1,6 +1,7 @@
 import { TagsList } from "@/app/components";
 import AssigneeSection from "./components/AssigneeSection";
 import EditableTitle from "./components/EditableTitle";
+import PriorityList from "./components/PriorityList";
 import { Task } from "@/lib/types/api/tasks";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -36,7 +37,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
       className="bg-white shadow-sm rounded-lg p-4 mb-4"
     >
       <EditableTitle task={task} />
-      <p className="text-sm text-gray-500">Priority: {task.priority.title}</p>
+      <PriorityList task={task} />
       <div className="flex flex-wrap gap-2 mt-2">
         <TagsList tags={task?.tags} />
       </div>
