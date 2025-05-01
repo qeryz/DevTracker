@@ -6,6 +6,7 @@ import { Sprint } from "@/lib/types/api/tasks";
 import { returnUniqueSprints, FilterType } from "../utils";
 import { FilterTypeList } from "./components/FilterTypeList";
 import { FilterOptions } from "./components/FilterOptions";
+import { FunnelIcon } from "@heroicons/react/24/outline";
 
 const FilterButton = () => {
   const { tasks, filter, setFilter, resetFilter } = useTaskStore();
@@ -36,8 +37,9 @@ const FilterButton = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-blue-500 text-white py-2 px-4 rounded"
+        className="bg-blue-500 text-white py-1.5 px-3 mb-2 rounded flex items-center"
       >
+        <FunnelIcon className="h-5 w-5 mr-2" />
         Filter
       </button>
       {isOpen && (

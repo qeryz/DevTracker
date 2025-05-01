@@ -1,6 +1,8 @@
 import { Sprint, Status, Priority } from "@/lib/types/api/tasks";
 import { User } from "@/lib/types/api/users";
 import { FilterType, getFilterOptions } from "@/app/components/utils";
+import { MinusCircleIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 interface FilterOptionsProps {
   activeFilter: FilterType | null;
@@ -43,13 +45,16 @@ export const FilterOptions = ({
             onClick={() =>
               handleFilterChange(activeFilter as FilterType, option.id)
             }
-            className={`text-gray-700 hover:text-blue-500 ${
-              filter[activeFilter as keyof typeof filter]?.includes(option.id)
-                ? "font-bold"
-                : ""
-            }`}
+            className={`flex items-center py-1 px-6 hover:bg-gray-100 text-sm text-gray-600`}
           >
-            {option.label}
+            {filter[activeFilter as keyof typeof filter]?.includes(
+              option.id,
+            ) ? (
+              <CheckCircleIcon className="h-4 w-4 mr-2 text-blue-500" />
+            ) : (
+              <MinusCircleIcon className="h-4 w-4 mr-2 text-gray-400" />
+            )}
+            <span className="ml-2">{option.label}</span>
           </button>
         ))}
       </div>
