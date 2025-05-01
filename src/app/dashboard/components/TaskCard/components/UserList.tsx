@@ -5,6 +5,8 @@ import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { mapTaskToPayload } from "./utils";
 import useUsersStore from "@/store/useUsersStore";
+import CustomSelect from "@/app/components/CustomSelect";
+import { DefaultAvatar } from "@/app/components";
 
 interface UserListProps {
   task: Task;
@@ -23,29 +25,27 @@ const UserList = ({ task }: UserListProps) => {
     },
   );
 
-  const handleAssigneeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newAssigneeId = parseInt(e.target.value, 10);
-    const updatedTask = mapTaskToPayload(task, { assignee: newAssigneeId });
+  // Handle selection change
+  const handleAssigneeChange = (userId: number) => {
+    const updatedTask = mapTaskToPayload(task, { assignee: userId });
     mutation.mutate({ id: task.id, updates: updatedTask });
   };
 
+  // Map users to CustomSelect options
+  const userOptions = users.map((user) => ({
+    id: user.id,
+    label: `${user.first_name} ${user.last_name}`,
+    icon: <DefaultAvatar width={20} height={20} />,
+  }));
+
   return (
-    <div className="flex items-center justify-end">
-      <select
-        id={`assignee-${task.id}`}
-        defaultValue={task.assignee?.id ?? ""}
+    <div className="flex items-center justify-center min-w-[max-content]">
+      <CustomSelect
+        label=""
+        options={userOptions}
+        selectedId={task.assignee?.id || 0}
         onChange={handleAssigneeChange}
-        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm block p-1.5 w-auto items-center hover:bg-gray-50 cursor-pointer transition-colors"
-      >
-        <option value="" hidden>
-          Select Assignee
-        </option>
-        {users?.map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.first_name} {user.last_name}
-          </option>
-        ))}
-      </select>
+      />
     </div>
   );
 };

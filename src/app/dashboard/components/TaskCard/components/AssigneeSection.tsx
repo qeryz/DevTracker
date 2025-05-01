@@ -19,20 +19,20 @@ const AssigneeSection = ({ task }: AssigneeSectionProps) => {
       <button onClick={() => setIsFocused((prev) => !prev)}>
         <DefaultAvatar height={20} width={20} />
       </button>
-      <span
+      <div
         className={`absolute bottom-full text-left left-1/2 -translate-x-1/2 mb-1 hidden group-hover:${
           isFocused ? "hidden" : "block"
-        } bg-gray-700 text-white text-xs rounded px-2 py-1`}
+        } bg-gray-700 text-white text-xs rounded`}
       >
         {task.assignee.first_name} {task.assignee.last_name}
-      </span>
-      <span
-        className={`absolute bottom-full text-left left-1/2 -translate-x-1/2 translate-y-25 bg-white shadow-sm rounded-lg p-4 mb-4 z-10 ${
+      </div>
+      <div
+        className={`absolute bottom-full text-left left-1/2 -translate-x-1/2 translate-y-25 bg-white shadow-sm rounded-lg mb-4 z-10 ${
           isFocused ? "block" : "hidden"
         }`}
       >
         <UserList task={task} />
-      </span>
+      </div>
     </span>
   );
 };

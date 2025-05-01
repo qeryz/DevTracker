@@ -30,9 +30,9 @@ const CustomSelect = ({
   useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative w-full min-w-[max-content]" ref={dropdownRef}>
       <label className="block text-sm font-medium text-gray-900">{label}</label>
-      <div className="relative mt-2">
+      <div className="relative my-2">
         <button
           type="button"
           className={`grid w-full cursor-default grid-cols-1 rounded-md bg-white hover:bg-gray-100 py-1.5 pr-2 pl-3 text-left text-gray-900 ${
@@ -66,7 +66,7 @@ const CustomSelect = ({
 
         {isOpen && (
           <ul
-            className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+            className="absolute z-10 mt-1 max-h-56 min-w-[max-content] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
             role="listbox"
           >
             {options.map((option) => (
