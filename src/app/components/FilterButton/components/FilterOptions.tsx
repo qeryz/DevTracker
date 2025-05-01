@@ -50,7 +50,7 @@ export const FilterOptions = ({
             {filter[activeFilter as keyof typeof filter]?.includes(
               option.id,
             ) ? (
-              <CheckCircleIcon className="h-4 w-4 mr-2 text-blue-500" />
+              <CheckCircleIcon className="h-4 w-4 mr-2 text-indigo-600" />
             ) : (
               <MinusCircleIcon className="h-4 w-4 mr-2 text-gray-400" />
             )}
