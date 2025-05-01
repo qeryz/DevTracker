@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useTaskStore from "@/store/useTaskStore";
 import useMiscStore from "@/store/useMiscStore";
 import useUsersStore from "@/store/useUsersStore";
@@ -7,6 +7,7 @@ import { returnUniqueSprints, FilterType } from "../utils";
 import { FilterTypeList } from "./components/FilterTypeList";
 import { FilterOptions } from "./components/FilterOptions";
 import { FunnelIcon } from "@heroicons/react/24/outline";
+import useClickOutside from "@/hooks/useClickOutside";
 
 const FilterButton = () => {
   const { tasks, filter, setFilter, resetFilter } = useTaskStore();
@@ -16,6 +17,7 @@ const FilterButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterType | null>(null);
   const [uniqueSprints, setUniqueSprints] = useState<Sprint[]>([]);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Extract unique sprints from tasks
@@ -33,11 +35,13 @@ const FilterButton = () => {
     setActiveFilter(null);
   };
 
+  useClickOutside(dropdownRef, () => setIsOpen(false));
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-indigo-600 text-white py-1.5 px-3 mb-2 rounded flex items-center"
+        className="bg-indigo-600 text-white py-1.5 px-3 mb-2 rounded flex items-center hover:cursor-pointer"
       >
         <FunnelIcon className="h-5 w-5 mr-2" />
         Filter
