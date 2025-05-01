@@ -39,12 +39,14 @@ const PriorityList = ({ task }: PriorityListProps) => {
   }));
 
   return (
-    <CustomSelect
-      label=""
-      options={priorityOptions}
-      selectedId={selectedPriority}
-      onChange={handlePriorityChange}
-    />
+    <div className="py-2">
+      <CustomSelect
+        label=""
+        options={priorityOptions}
+        selectedId={selectedPriority}
+        onChange={handlePriorityChange}
+      />
+    </div>
   );
 };
 

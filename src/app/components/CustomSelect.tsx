@@ -32,7 +32,7 @@ const CustomSelect = ({
   return (
     <div className="relative w-full min-w-[max-content]" ref={dropdownRef}>
       <label className="block text-sm font-medium text-gray-900">{label}</label>
-      <div className="relative my-2">
+      <div className="relative">
         <button
           type="button"
           className={`grid w-full cursor-default grid-cols-1 rounded-md bg-white hover:bg-gray-100 py-1.5 pr-2 pl-3 text-left text-gray-900 ${

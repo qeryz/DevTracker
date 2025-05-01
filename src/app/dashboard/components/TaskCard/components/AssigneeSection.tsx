@@ -27,7 +27,7 @@ const AssigneeSection = ({ task }: AssigneeSectionProps) => {
         {task.assignee.first_name} {task.assignee.last_name}
       </div>
       <div
-        className={`absolute bottom-full text-left left-1/2 -translate-x-1/2 translate-y-25 bg-white shadow-sm rounded-lg mb-4 z-10 ${
+        className={`absolute bottom-full text-left left-1/2 -translate-x-22 translate-y-19 rounded-lg mb-4 z-10 ${
           isFocused ? "block" : "hidden"
         }`}
       >

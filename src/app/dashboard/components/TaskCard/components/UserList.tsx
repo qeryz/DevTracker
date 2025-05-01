@@ -39,7 +39,12 @@ const UserList = ({ task }: UserListProps) => {
   }));
 
   return (
-    <div className="flex items-center justify-center min-w-[max-content]">
+    <div
+      style={{
+        minWidth: `calc(100% + 36px)`,
+      }}
+      className="flex items-center justify-center rounded-md shadow-sm min-w-[max-content]"
+    >
       <CustomSelect
         label=""
         options={userOptions}
