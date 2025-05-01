@@ -35,7 +35,7 @@ export const FilterOptions = ({
 
   return (
     <div>
-      <h4 className="text-sm font-bold mb-2">
+      <h4 className="text-sm font-medium mb-2">
         Select {activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)}
       </h4>
       <div className="flex flex-col gap-2">
@@ -45,7 +45,7 @@ export const FilterOptions = ({
             onClick={() =>
               handleFilterChange(activeFilter as FilterType, option.id)
             }
-            className={`flex items-center py-1 px-6 hover:bg-gray-100 text-sm text-gray-600`}
+            className={`flex items-center py-1 px-6 hover:bg-gray-100 text-sm text-gray-700`}
           >
             {filter[activeFilter as keyof typeof filter]?.includes(
               option.id,
