@@ -27,7 +27,7 @@ const TaskForm = () => {
   return (
     <button
       onClick={handleAddTask}
-      className="mt-6 bg-blue-500 text-white py-1.5 px-3 rounded"
+      className="mt-6 bg-indigo-600 text-white py-1.5 px-3 rounded"
     >
       Add Task
     </button>

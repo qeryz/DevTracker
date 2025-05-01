@@ -37,7 +37,7 @@ const FilterButton = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-blue-500 text-white py-1.5 px-3 mb-2 rounded flex items-center"
+        className="bg-indigo-600 text-white py-1.5 px-3 mb-2 rounded flex items-center"
       >
         <FunnelIcon className="h-5 w-5 mr-2" />
         Filter
