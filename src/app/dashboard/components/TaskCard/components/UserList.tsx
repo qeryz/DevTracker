@@ -5,8 +5,7 @@ import { updateTask } from "@/lib/api/tasks";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { mapTaskToPayload } from "./utils";
 import useUsersStore from "@/store/useUsersStore";
-import CustomSelect from "@/app/components/CustomSelect";
-import { DefaultAvatar } from "@/app/components";
+import { CustomSelect, DefaultAvatar } from "@/app/components";
 
 interface UserListProps {
   task: Task;

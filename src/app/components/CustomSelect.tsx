@@ -15,7 +15,7 @@ interface CustomSelectProps {
   onChange: (id: number) => void;
 }
 
-const CustomSelect = ({
+export const CustomSelect = ({
   label,
   options,
   outlined = false,
@@ -109,5 +109,3 @@ const CustomSelect = ({
     </div>
   );
 };
-
-export default CustomSelect;

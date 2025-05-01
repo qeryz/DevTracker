@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
 import { mapTaskToPayload, PriorityIcon } from "./utils";
 import useMiscStore from "@/store/useMiscStore";
-import CustomSelect from "@/app/components/CustomSelect";
+import { CustomSelect } from "@/app/components";
 
 interface PriorityListProps {
   task: Task;
