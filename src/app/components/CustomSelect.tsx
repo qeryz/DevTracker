@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { useState, useRef, ReactNode } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 interface CustomSelectOption {
   id: number;
@@ -26,22 +27,7 @@ const CustomSelect = ({
 
   const selectedOption = options.find((option) => option.id === selectedId);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
     <div className="relative" ref={dropdownRef}>
