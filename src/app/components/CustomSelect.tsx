@@ -35,7 +35,7 @@ const CustomSelect = ({
       <div className="relative">
         <button
           type="button"
-          className={`grid w-full cursor-default grid-cols-1 rounded-md bg-white hover:bg-gray-100 py-1.5 pr-2 pl-3 text-left text-gray-900 ${
+          className={`grid w-full cursor-pointer grid-cols-1 rounded-md hover:bg-gray-100 py-1.5 pr-2 pl-3 text-left text-gray-900 ${
             !outlined ? "" : "outline-1 -outline-offset-1 outline-gray-300"
           } focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm`}
           aria-haspopup="listbox"
@@ -72,7 +72,7 @@ const CustomSelect = ({
             {options.map((option) => (
               <li
                 key={option.id}
-                className={`relative cursor-default py-2 pr-9 pl-3 text-gray-900 select-none hover:bg-gray-100 ${
+                className={`relative cursor-pointer py-2 pr-9 pl-3 text-gray-900 select-none hover:bg-gray-100 ${
                   selectedId === option.id ? "font-semibold" : "font-normal"
                 }`}
                 role="option"

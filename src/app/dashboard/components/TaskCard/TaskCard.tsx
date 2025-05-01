@@ -34,7 +34,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white shadow-sm rounded-lg p-4 mb-4"
+      className="bg-white shadow-sm rounded-lg p-4 mb-4 hover:bg-gray-200 transition ease-in-out duration-300 cursor-pointer"
     >
       <EditableTitle task={task} />
       <PriorityList task={task} />

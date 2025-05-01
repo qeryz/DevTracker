@@ -43,7 +43,7 @@ const UserList = ({ task }: UserListProps) => {
       style={{
         minWidth: `calc(100% + 36px)`,
       }}
-      className="flex items-center justify-center rounded-md shadow-sm min-w-[max-content]"
+      className="flex items-center justify-center rounded-md shadow-sm min-w-[max-content] bg-white"
     >
       <CustomSelect
         label=""
