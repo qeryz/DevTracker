@@ -64,6 +64,23 @@ export type Task = {
   modified_at: string;
 };
 
+export type Comments = {
+  id: number;
+  user: User;
+  category: string;
+  commented_object: Task;
+  content: string;
+  created_at: string;
+  modified_at: string;
+};
+
+export type CommentsCreatePayload = {
+  user: number;
+  content: string;
+  commented_object: number;
+  category: string;
+};
+
 export type TaskCreatePayload = {
   title: string;
   description: string;
