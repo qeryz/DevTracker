@@ -3,6 +3,7 @@ import { useTasks } from "@/hooks/useTasks";
 import { useStatuses } from "@/hooks/useStatuses";
 import { useUsers } from "@/hooks/useUsers";
 import { usePriorities } from "@/hooks/usePriorities";
+import { useComments } from "@/hooks/useComments";
 
 const DashboardContainer = () => {
   const { isLoading: tasksLoading, error: tasksError } = useTasks();
@@ -10,8 +11,15 @@ const DashboardContainer = () => {
   const { isLoading: usersLoading, error: usersError } = useUsers();
   const { isLoading: prioritiesLoading, error: prioritiesError } =
     usePriorities();
+  const { isLoading: commentsLoading, error: commentsError } = useComments();
 
-  if (tasksLoading || statusesLoading || usersLoading || prioritiesLoading) {
+  if (
+    tasksLoading ||
+    statusesLoading ||
+    usersLoading ||
+    prioritiesLoading ||
+    commentsLoading
+  ) {
     return <div>Loading...</div>;
   }
 
@@ -20,6 +28,7 @@ const DashboardContainer = () => {
     statusesError,
     usersError,
     prioritiesError,
+    commentsError,
   ].filter(Boolean);
   const firstError = errors.find((error) => error instanceof Error);
 
