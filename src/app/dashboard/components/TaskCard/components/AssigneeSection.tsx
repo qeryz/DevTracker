@@ -42,14 +42,14 @@ const AssigneeSection = ({ task }: AssigneeSectionProps) => {
       >
         {task.assignee.first_name} {task.assignee.last_name}
       </div>
-      {isFocused && (
-        <div
-          ref={dropdownRef}
-          className="absolute bottom-full text-left left-1/2 -translate-x-10 translate-y-19 rounded-lg mb-4 z-10"
-        >
-          <UserList task={task} />
-        </div>
-      )}
+      <div
+        ref={dropdownRef}
+        className={`absolute bottom-full text-left left-1/2 -translate-x-22 translate-y-19 rounded-lg mb-4 z-10 ${
+          isFocused ? "block" : "hidden"
+        }`}
+      >
+        <UserList task={task} />
+      </div>
     </span>
   );
 };
