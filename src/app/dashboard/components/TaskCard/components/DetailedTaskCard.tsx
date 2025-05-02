@@ -3,6 +3,7 @@ import { CustomModal, DefaultAvatar } from "@/app/components";
 import AssigneeSection from "./AssigneeSection";
 import EditableTitle from "./EditableTitle";
 import PriorityList from "./PriorityList";
+import { CommentsSection } from "./CommentsSection";
 
 interface DetailedTaskCardProps {
   task: Task;
@@ -32,7 +33,9 @@ const DetailedTaskCard = ({
             </div>
           </div>
           <div className="flex w-full items-center justify-center border-t-1 sm:border-l-1 sm:border-t-0 border-gray-200 sm:pl-4">
-            <div className="mt-4 sm:mt-0 pl-0">Testing</div>
+            <div className="mt-4 sm:mt-0 pl-0">
+              <CommentsSection taskId={task.id} />
+            </div>
           </div>
         </div>
       }
