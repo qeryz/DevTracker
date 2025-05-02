@@ -7,7 +7,7 @@ import { Task } from "@/lib/types/api/tasks";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import useTaskStore from "@/store/useTaskStore";
-import DetailedTaskCard from "./components/DetailedTaskCard";
+import DetailedTaskCard from "../DetailedTaskCard/DetailedTaskCard";
 
 interface TaskCardProps {
   task: Task;

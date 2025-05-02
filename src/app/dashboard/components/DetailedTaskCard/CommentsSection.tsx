@@ -1,5 +1,5 @@
 import { useTaskComments } from "@/hooks/useTaskComments";
-import { formatDateAndTime } from "./utils";
+import { formatDateAndTime } from "@/app/components/utils";
 import { DefaultAvatar } from "@/app/components";
 export const CommentsSection = ({ taskId }: { taskId: number }) => {
   const comments = useTaskComments(taskId);
