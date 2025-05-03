@@ -7,7 +7,7 @@ export const CommentInput = () => {
         id="message"
         style={{ resize: "none" }}
         rows={4}
-        className="block outline-none p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-0"
+        className="block outline-none p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg border-0"
         placeholder="Add a comment..."
       />
 
