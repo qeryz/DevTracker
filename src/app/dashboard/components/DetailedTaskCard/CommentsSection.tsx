@@ -17,7 +17,7 @@ export const CommentsSection = ({ taskId }: { taskId: number }) => {
       ) : (
         <p className="text-gray-500">No comments yet.</p>
       )}
-      <CommentInput />
+      <CommentInput taskId={taskId} />
     </div>
   );
 };
