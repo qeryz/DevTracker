@@ -11,7 +11,7 @@ export const CommentItem = ({ comment }: { comment: any }) => {
         </span>
       </div>
       <p className="text-sm text-gray-700 w-full">{comment.content}</p>
-      <span className="flex text-xs text-gray-500 w-full justify-end mt-2">
+      <span className="flex text-xs text-gray-500 w-full justify-end mt-2 select-none">
         {formatDateAndTime(comment.created_at)}
       </span>
     </li>
