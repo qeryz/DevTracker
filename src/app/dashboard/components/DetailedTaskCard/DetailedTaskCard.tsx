@@ -24,9 +24,9 @@ const DetailedTaskCard = ({
               <AssigneeSection task={task} /> {task.assignee.first_name}{" "}
               {task.assignee.last_name}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full">
               <span className="flex-shrink-0 font-medium">Priority:</span>
-              <div>
+              <div className="w-full">
                 <PriorityList task={task} />
               </div>
             </div>
