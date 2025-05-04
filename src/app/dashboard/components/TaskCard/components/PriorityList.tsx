@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Task, TaskCreatePayload } from "@/lib/types/api/tasks";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";
@@ -23,11 +22,8 @@ const PriorityList = ({ task }: PriorityListProps) => {
   );
 
   const { priorities } = useMiscStore();
-  const [selectedPriority, setSelectedPriority] = useState(task.priority.id);
 
   const handlePriorityChange = (priorityId: number) => {
-    setSelectedPriority(priorityId);
-
     const updatedTask = mapTaskToPayload(task, { priority: priorityId });
     updateTaskMutation.mutate({ id: task.id, updates: updatedTask });
   };
@@ -43,7 +39,7 @@ const PriorityList = ({ task }: PriorityListProps) => {
       <CustomSelect
         label=""
         options={priorityOptions}
-        selectedId={selectedPriority}
+        selectedId={task.priority.id || 0}
         onChange={handlePriorityChange}
       />
     </div>
