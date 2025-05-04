@@ -10,7 +10,7 @@ export const CommentItem = ({ comment }: { comment: any }) => {
           {comment.user.first_name} {comment.user.last_name}
         </span>
       </div>
-      <p className="flex justify-end text-sm text-gray-700 w-full">
+      <p className="flex justify-start text-sm text-gray-700 w-full">
         {comment.content}
       </p>
       <span className="flex text-xs text-gray-500 w-full justify-end mt-2 select-none">
