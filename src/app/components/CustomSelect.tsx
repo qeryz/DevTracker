@@ -24,28 +24,16 @@ export const CustomSelect = ({
   onChange,
 }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLUListElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectedOption = options.find((option) => option.id === selectedId);
 
-  useClickOutside(buttonRef, () => setIsOpen(false));
-
-  // Calculate dropdown position
-  const getDropdownPosition = () => {
-    if (!buttonRef.current) return { top: 0, left: 0, width: "auto" };
-    const rect = buttonRef.current.getBoundingClientRect();
-    return {
-      top: rect.bottom + window.scrollY, // Account for scrolling
-      left: rect.left + window.scrollX,
-      width: rect.width, // Match the button width
-    };
-  };
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
-    <div className="relative w-full min-w-[max-content]">
+    <div className="relative w-full min-w-[max-content]" ref={dropdownRef}>
       <label className="block text-sm font-medium text-gray-900">{label}</label>
-      <div className="relative" ref={buttonRef}>
+      <div className="relative">
         <button
           type="button"
           className={`grid w-full cursor-pointer grid-cols-1 rounded-md hover:bg-gray-100 py-1.5 pr-2 pl-3 text-left text-gray-900 ${
@@ -77,51 +65,47 @@ export const CustomSelect = ({
           )}
         </button>
 
-        {isOpen &&
-          createPortal(
-            <ul
-              ref={dropdownRef}
-              className="absolute z-50 max-h-56 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-              style={getDropdownPosition()} // Dynamically position the dropdown
-              role="listbox"
-            >
-              {options.map((option) => (
-                <li
-                  key={option.id}
-                  className={`relative cursor-pointer py-2 pr-9 pl-3 text-gray-900 select-none hover:bg-gray-100 ${
-                    selectedId === option.id ? "font-semibold" : "font-normal"
-                  }`}
-                  role="option"
-                  onClick={() => {
-                    onChange(option.id);
-                    setIsOpen(false);
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    {option.icon && option.icon}
-                    <span className="block truncate">{option.label}</span>
-                  </div>
-                  {selectedId === option.id && (
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                      <svg
-                        className="size-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>,
-            document.body, // Render the dropdown in the body
-          )}
+        {isOpen && (
+          <ul
+            className="absolute z-10 mt-1 max-h-56 min-w-[max-content] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+            role="listbox"
+          >
+            {options.map((option) => (
+              <li
+                key={option.id}
+                className={`relative cursor-pointer py-2 pr-9 pl-3 text-gray-900 select-none hover:bg-gray-100 ${
+                  selectedId === option.id ? "font-semibold" : "font-normal"
+                }`}
+                role="option"
+                onClick={() => {
+                  onChange(option.id);
+                  setIsOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  {option.icon && option.icon}
+                  <span className="block truncate">{option.label}</span>
+                </div>
+                {selectedId === option.id && (
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+                    <svg
+                      className="size-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
