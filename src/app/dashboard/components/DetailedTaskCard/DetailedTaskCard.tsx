@@ -41,14 +41,14 @@ const DetailedTaskCard = ({
               </div>
             </div>
             <div className="flex-shrink-0 font-medium text-lg">Description</div>
-            <div className="flex items-center gap-2">
-              <div>
+            <div className="flex items-center mb-6 sm:mb-0 max-h-50 overflow-hidden">
+              <div className="w-full h-full overflow-y-auto">
                 {task.description ? task.description : "No details provided"}
               </div>
             </div>
           </div>
           <div className="flex w-full items-start sm:items-start justify-center border-t-1 sm:border-l-1 sm:border-t-0 border-gray-200 sm:pl-4">
-            <div className="flex w-full mt-4 sm:mt-0 pl-0">
+            <div className="flex w-full mt-4 sm:mt-0 pl-0 h-full">
               <CommentsSection taskId={task.id} />
             </div>
           </div>

@@ -37,7 +37,7 @@ export const CustomModal = ({
       >
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           {/* Modal panel */}
-          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl min-h-[70vh] max-h-[70vh] w-full flex flex-col">
+          <div className="relative transform rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl min-h-[70vh] max-h-[70vh] w-full flex flex-col">
             <div className="flex items-center justify-end">
               {showCloseButton && (
                 <button
@@ -51,12 +51,12 @@ export const CustomModal = ({
             </div>
             <div
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-              className="flex flex-col bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 overflow-y-auto h-full flex-grow"
+              className="flex flex-col bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 h-full flex-grow"
             >
               <div className="flex flex-col sm:items-start w-full h-full flex-grow">
                 <div className="flex flex-col mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full h-full flex-grow">
                   <div
-                    className="text-base font-semibold text-gray-900"
+                    className="text-base font-semibold text-gray-900 mt-8"
                     id="modal-title"
                   >
                     {title}
