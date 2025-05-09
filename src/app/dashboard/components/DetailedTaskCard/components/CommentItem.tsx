@@ -1,14 +1,21 @@
 import { DefaultAvatar } from "@/app/components";
 import { formatDateAndTime } from "@/app/components/utils";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { Comments } from "@/lib/types/api/tasks";
 
-export const CommentItem = ({ comment }: { comment: any }) => {
+export const CommentItem = ({ comment }: { comment: Comments }) => {
   return (
     <li key={comment.id} className="p-4 bg-gray-100 rounded-md w-full">
-      <div className="flex items-center gap-2 mb-2">
-        <DefaultAvatar height={15} width={15} />
-        <span className="text-sm font-semibold">
-          {comment.user.first_name} {comment.user.last_name}
-        </span>
+      <div className="flex items-center w-full gap-2 mb-2">
+        <div className="flex items-center gap-2 w-[90%]">
+          <DefaultAvatar height={15} width={15} />
+          <span className="text-sm font-semibold">
+            {comment.user.first_name} {comment.user.last_name}
+          </span>
+        </div>
+        <div className="flex justify-end">
+          <EllipsisVerticalIcon className="h-5 w-5 text-gray-400" />
+        </div>
       </div>
       <p className="flex justify-start text-sm text-gray-700 w-full">
         {comment.content}
