@@ -1,7 +1,7 @@
 import { DefaultAvatar } from "@/app/components";
 import { formatDateAndTime } from "@/app/components/utils";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Comments } from "@/lib/types/api/tasks";
+import { CommentMenu } from "./CommentMenu";
 
 export const CommentItem = ({ comment }: { comment: Comments }) => {
   return (
@@ -13,8 +13,8 @@ export const CommentItem = ({ comment }: { comment: Comments }) => {
             {comment.user.first_name} {comment.user.last_name}
           </span>
         </div>
-        <div className="flex justify-end">
-          <EllipsisVerticalIcon className="h-5 w-5 text-gray-400" />
+        <div className="relative flex justify-end">
+          <CommentMenu commentId={comment.id} />
         </div>
       </div>
       <p className="flex justify-start text-sm text-gray-700 w-full">
