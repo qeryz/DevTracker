@@ -63,6 +63,7 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
           <div className="flex items-center gap-2">
             <input
               {...register("title")}
+              onClick={(e) => e.stopPropagation()}
               className={`border-2 rounded px-2 border-indigo-600 py-1 text-sm ${
                 errors.title ? "border-red-500" : ""
               }`}
