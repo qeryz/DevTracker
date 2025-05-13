@@ -72,6 +72,7 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
               type="submit"
               onClick={(e) => e.stopPropagation()}
               className="text-green-500 hover:text-green-700"
+              aria-label="Save title edit"
             >
               <CheckIcon className="w-4 h-4 cursor-pointer" />
             </button>
@@ -82,6 +83,7 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
                 handleCancel();
               }}
               className="text-red-500 hover:text-red-700"
+              aria-label="Cancel title edit"
             >
               <XMarkIcon className="w-4 h-4 cursor-pointer" />
             </button>
@@ -99,6 +101,7 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
               setIsEditing(task.id, true);
             }}
             className="cursor-pointer"
+            aria-label="Edit title"
           >
             <PencilSquareIcon className="inline-block w-4 h-4 ml-2 mb-1 flex-shrink-0 text-gray-500 hover:text-gray-700 transition-colors" />
           </button>
