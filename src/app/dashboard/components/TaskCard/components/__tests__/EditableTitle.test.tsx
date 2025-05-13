@@ -6,7 +6,6 @@ import { Task } from "@/lib/types/api/tasks";
 import { useMutation, QueryClient, QueryClientProvider } from "react-query";
 import useTaskStore from "@/store/useTaskStore";
 
-// 1. Type-safe store mock
 jest.mock("@/store/useTaskStore");
 const mockSetIsEditing = jest.fn();
 const mockUseTaskStore = useTaskStore as jest.MockedFunction<
@@ -17,7 +16,6 @@ mockUseTaskStore.mockImplementation(() => ({
   setIsEditing: mockSetIsEditing,
 }));
 
-// 2. Proper React Query v4+ mocking
 jest.mock("react-query", () => ({
   ...jest.requireActual("react-query"),
   useMutation: jest.fn(),
@@ -26,11 +24,10 @@ jest.mock("react-query", () => ({
 const mockUseMutation = useMutation as jest.Mock;
 const mockMutate = jest.fn();
 
-// 3. Type-safe query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false, // Important for testing
+      retry: false,
     },
   },
 });
