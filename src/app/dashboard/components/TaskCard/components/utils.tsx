@@ -26,11 +26,16 @@ export const mapTaskToPayload = (
   };
 };
 
+export const TITLE_MIN_LENGTH = 3;
+export const TITLE_MAX_LENGTH = 50;
+export const TITLE_EXCEEDED_MESSAGE = `Title cannot exceed ${TITLE_MAX_LENGTH} characters`;
+export const TITLE_MIN_MESSAGE = `Title must be at least ${TITLE_MIN_LENGTH} characters`;
+
 export const titleSchema = z.object({
   title: z
     .string()
-    .min(3, "Title must be at least 3 characters")
-    .max(50, "Title cannot exceed 50 characters"),
+    .min(TITLE_MIN_LENGTH, TITLE_MIN_MESSAGE)
+    .max(TITLE_MAX_LENGTH, TITLE_EXCEEDED_MESSAGE),
 });
 
 interface PriorityIconProps {

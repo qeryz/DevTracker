@@ -5,6 +5,7 @@ import EditableTitle from "../EditableTitle";
 import { Task } from "@/lib/types/api/tasks";
 import { useMutation, QueryClient, QueryClientProvider } from "react-query";
 import useTaskStore from "@/store/useTaskStore";
+import { TITLE_MIN_MESSAGE, TITLE_EXCEEDED_MESSAGE } from "../utils";
 
 jest.mock("@/store/useTaskStore");
 const mockSetIsEditing = jest.fn();
@@ -205,9 +206,21 @@ describe("EditableTitle", () => {
       screen.getByRole("button", { name: /save title edit/i }),
     );
 
-    expect(
-      screen.getByText(/title must be at least 3 characters/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(TITLE_MIN_MESSAGE)).toBeInTheDocument();
+  });
+
+  it("shows error message when title is too long", async () => {
+    mockUseTaskStore.mockImplementation(() => ({
+      isEditing: { [task.id]: true },
+      setIsEditing: mockSetIsEditing,
+    }));
+    renderWithProviders(<EditableTitle task={task} />);
+    await userEvent.clear(screen.getByRole("textbox"));
+    await userEvent.type(screen.getByRole("textbox"), "a".repeat(51));
+    await userEvent.click(
+      screen.getByRole("button", { name: /save title edit/i }),
+    );
+    expect(screen.getByText(TITLE_EXCEEDED_MESSAGE)).toBeInTheDocument();
   });
 
   it("saves changes when save button is clicked", async () => {
