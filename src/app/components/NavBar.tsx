@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   return (
     <nav className="w-full px-4 py-2 bg-gray-50 flex items-center justify-between z-50 sticky top-0 border-b border-gray-300">
-      <div className="text-xl font-bold">DevBoard</div>
+      <div className="text-xl font-bold">DevTracker</div>
       <div className="flex items-center gap-4" ref={dropdownRef}>
         <button
           className="flex items-center relative group"
