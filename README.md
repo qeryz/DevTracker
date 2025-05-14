@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🧠 DevTracker
 
-## Getting Started
+A Jira-style task management app featuring modern UI, drag-and-drop task board, commenting, authentication, and more.
 
-First, run the development server:
+## 📸 Screenshots
+![image](https://github.com/user-attachments/assets/e69df2fc-c8e3-4aad-92ac-228d1f79f010)
+
+
+## ✨ Features
+
+- JWT authentication
+- Create/update/delete tasks
+- Drag-and-drop task board
+- Assign users, priority, tags
+- Commenting system
+- Zod validation + React Hook Form
+- Zustand + React Query state management
+- Jest unit testing & Cypress E2E
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, TypeScript, Tailwind CSS
+- **State:** Zustand, React Query
+- **Forms & Validation:** React Hook Form, Zod
+- **Testing:** Jest, Cypress
+- **Auth:** JWT
+
+## 🚀 Getting Started
 
 ```bash
+# Clone the repo
+git clone https://github.com/your-username/devtracker.git
+
+# Install dependencies
+npm install
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Testing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✅ Unit Testing: via Jest
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✅ E2E Testing: via Cypress for full user MVP flow and interaction coverage
 
-## Learn More
+## 📰 Entity Relationship Model
+```mermaid
+flowchart TD
+    User[User] -->|creates| Epic
+    User -->|assigns| Task
+    User -->|writes| Comment
 
-To learn more about Next.js, take a look at the following resources:
+    Epic -->|has many| Task
+    Epic -->|has| Status
+    Epic --> Comment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Sprint -->|has many| Task
+    Sprint -->|has| Status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Task -->|has| Status
+    Task -->|has| Priority
+    Task -->|has many| Tag
+    Task --> Comment
 
-## Deploy on Vercel
+    Tag -->|used in| Task
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```mermaid
+graph LR
+  subgraph Client
+    U[👤 User Browser]
+  end
+  subgraph Frontend [Next.js]
+    FE[Static/SSR Pages]
+  end
+  subgraph Backend [Django REST API]
+    API[/Gunicorn + DRF/]
+    DB[(PostgreSQL)]
+  end
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  U -- HTTPS --> FE
+  FE -- REST/JSON --> API
+  API --> DB
+```
+
+## 📂 Folder Structure
+```
+src/
+├── app/ # Main application routes
+│ ├── layout.tsx # Root layout
+│ ├── dashboard/ # Dashboard feature
+│ │ ├── page.tsx # Dashboard page
+│ │ └── components/ # Dashboard components
+│ │ ├── TaskCard/ # Reusable task component
+│ │ ├── TaskForm/ # Task creation form
+│ │ └── Column/ # Kanban column component
+│ ├── login/ # Login feature
+│ └── components/ # Shared UI components
+│ ├── BackendSpinUpNotice.tsx # Display notice while BE spins up
+│ ├── CustomModal.tsx
+│ ├── NavBar.tsx
+│ └── FilterButton/ # Filter component with sub-components
+│
+├── lib/ # Core application logic
+│ ├── api/ # API service layer
+│ │ ├── tasks.ts # Task-related API calls
+│ │ └── auth.ts # Authentication service
+│ └── types/ # TypeScript definitions
+│
+├── hooks/ # Custom React hooks
+│ ├── useTasks.ts # Task management hook
+│ ├── useUsers.ts # User data hook
+│ └── useClickOutside.ts # UI interaction hook
+│
+├── context/ # React context providers
+│ ├── AuthProvider.tsx # Authentication context
+│ └── QueryClientProvider.tsx # React Query provider
+│
+├── store/ # Zustand/state management
+│ ├── useTaskStore.ts # Task state
+│ └── useUsersStore.ts # User state
+| └── useMiscStore.ts # Status, priorities, etc state
+│
+├── assets/ # Static assets
+└── middleware.ts # Middleware
+```
