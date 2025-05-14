@@ -42,6 +42,7 @@ const LoginForm = () => {
         <input
           type="text"
           placeholder="Username"
+          aria-label="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="w-full px-4 py-2 border"
@@ -49,12 +50,14 @@ const LoginForm = () => {
         <input
           type="password"
           placeholder="Password"
+          aria-label="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-2 border"
         />
         <button
           type="submit"
+          aria-label="login"
           className="w-full py-2 bg-blue-500 text-white"
           disabled={mutation.isLoading}
         >

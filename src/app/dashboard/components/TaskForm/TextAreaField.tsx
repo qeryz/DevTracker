@@ -20,6 +20,7 @@ const TextAreaField = ({
         placeholder={placeholder}
         style={{ resize: "none" }}
         rows={3}
+        aria-label="Task Description"
         className={`border-2 rounded px-2 py-1 text-sm border-gray-300 focus:border-indigo-600 focus:outline-none ${
           error ? "border-red-500 focus:border-red-500" : ""
         }`}

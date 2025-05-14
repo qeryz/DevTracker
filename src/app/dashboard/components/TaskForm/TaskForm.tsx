@@ -96,6 +96,7 @@ const TaskForm = () => {
       <button
         onClick={handleOpenForm}
         className="mt-6 bg-indigo-600 text-white py-1.5 px-3 rounded cursor-pointer"
+        aria-label="Add Task"
       >
         Add Task
       </button>
