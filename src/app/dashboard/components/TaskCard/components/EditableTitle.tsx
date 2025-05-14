@@ -60,13 +60,14 @@ const EditableTitle = ({ task }: EditableTitleProps) => {
           onSubmit={handleSubmit(handleSave)}
           className="flex flex-col gap-2"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <input
               {...register("title")}
               onClick={(e) => e.stopPropagation()}
-              className={`border-2 rounded px-2 border-indigo-600 py-1 text-sm ${
+              className={`border-2 rounded px-2 border-indigo-600 flex-wrap py-1 text-sm w-full max-w-full overflow-hidden text-ellipsis ${
                 errors.title ? "border-red-500" : ""
               }`}
+              style={{ whiteSpace: "nowrap" }}
             />
             <button
               type="submit"
