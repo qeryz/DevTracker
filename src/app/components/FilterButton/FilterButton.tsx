@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import useTaskStore from "@/store/useTaskStore";
 import useMiscStore from "@/store/useMiscStore";
