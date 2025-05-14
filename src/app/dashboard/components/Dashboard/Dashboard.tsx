@@ -95,8 +95,11 @@ const Dashboard = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Your Tasks</h2>
-      <FilterButton />
+      <h2 className="text-2xl font-bold mb-4">Your Tasks</h2>
+      <div className="flex gap-2 mb-2">
+        <FilterButton />
+        <TaskForm />
+      </div>
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
@@ -116,13 +119,11 @@ const Dashboard = () => {
             );
           })}
         </div>
-
         {/* DragOverlay to keep the dragged item visible */}
         <DragOverlay>
           {activeTask ? <TaskCard task={activeTask} /> : null}
         </DragOverlay>
       </DndContext>
-      <TaskForm />
     </div>
   );
 };
