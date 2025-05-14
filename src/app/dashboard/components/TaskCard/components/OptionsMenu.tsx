@@ -31,6 +31,7 @@ export const OptionsMenu = ({ taskId }: OptionsMenuProps) => {
     <div className="relative">
       <EllipsisVerticalIcon
         className="h-5 w-5 text-gray-400 cursor-pointer hover:text-gray-600"
+        aria-label="Options"
         onClick={(e) => {
           e.stopPropagation();
           setShowOptions((prev) => !prev);
@@ -40,6 +41,7 @@ export const OptionsMenu = ({ taskId }: OptionsMenuProps) => {
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
           <button
             ref={buttonRef}
+            aria-label="Delete Task"
             className="block cursor-pointer w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 hover:rounded-md"
             onClick={handleDelete}
           >

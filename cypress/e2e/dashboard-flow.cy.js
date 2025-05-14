@@ -6,7 +6,7 @@ describe("Dashboard Flow", () => {
     // Log in with valid credentials
     cy.get("input[aria-label='username']").type("staff");
     cy.get("input[aria-label='password']").type("pass123");
-    cy.get("button[aria-label='submit']").click();
+    cy.get("button[aria-label='login']").click();
 
     // Verify redirection to the dashboard
     cy.url().should("include", "http://localhost:3000/dashboard");
@@ -26,7 +26,15 @@ describe("Dashboard Flow", () => {
     cy.get("button[type='submit']").click();
 
     // Verify the task appears in the default column (e.g., "To Do")
-    cy.contains("New Task Title").should("exist");
+    cy.contains("New Task Title")
+      .parents("[data-task-id]") // Adjust this selector to match the task container
+      .within(() => {
+        // Click on options menu of the task
+        cy.get("[aria-label='Options']").click();
+
+        // Click on the "Delete" option
+        cy.get("button[aria-label='Delete Task']").click();
+      });
 
     // // Drag and drop the task to the "Done" column
     // cy.contains("New Task Title")
