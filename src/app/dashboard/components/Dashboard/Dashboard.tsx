@@ -96,7 +96,7 @@ const Dashboard = () => {
   return (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4">Your Tasks</h2>
-      <div className="flex gap-2 mb-2">
+      <div className="flex gap-4 mb-2">
         <FilterButton />
         <TaskForm />
       </div>

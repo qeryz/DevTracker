@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
 import ActionButtons from "./ActionButtons";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 type TaskFormTypes = z.infer<typeof taskSchema>;
 
@@ -95,9 +96,10 @@ const TaskForm = () => {
       )}
       <button
         onClick={handleOpenForm}
-        className="bg-indigo-600 text-white py-1.5 px-3 rounded cursor-pointer"
+        className="flex items-center bg-gray-500 hover:bg-gray-600 text-white py-1.5 px-3 rounded cursor-pointer"
         aria-label="Add Task"
       >
+        <PlusIcon className="h-5 w-5 mr-2" />
         Add Task
       </button>
     </div>
