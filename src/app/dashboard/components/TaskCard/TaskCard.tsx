@@ -47,9 +47,12 @@ const TaskCard = ({ task }: TaskCardProps) => {
         className="bg-white shadow-sm rounded-lg p-4 mb-4 hover:bg-gray-200 transition ease-in-out duration-300 cursor-pointer"
         data-task-id={task.id}
       >
-        <div className="flex items-center justify-between">
+        <div
+          className="flex items-center justify-between"
+          onClick={(e) => e.stopPropagation()}
+        >
           <EditableTitle task={task} />
-          <OptionsMenu taskId={task.id} />
+          <OptionsMenu task={task} />
         </div>
         <div onClick={(e) => e.stopPropagation()}>
           <PriorityList task={task} />
