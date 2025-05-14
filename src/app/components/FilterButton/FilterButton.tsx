@@ -39,7 +39,7 @@ const FilterButton = () => {
   useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div ref={dropdownRef}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="bg-indigo-600 text-white py-1.5 px-3 mb-2 rounded flex items-center hover:cursor-pointer"
