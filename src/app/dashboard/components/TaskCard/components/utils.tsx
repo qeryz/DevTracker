@@ -28,14 +28,26 @@ export const mapTaskToPayload = (
 
 export const TITLE_MIN_LENGTH = 3;
 export const TITLE_MAX_LENGTH = 50;
+export const DESCRIPTION_MAX_LENGTH = 250;
+export const DESCRIPTION_MIN_LENGTH = 10;
 export const TITLE_EXCEEDED_MESSAGE = `Title cannot exceed ${TITLE_MAX_LENGTH} characters`;
 export const TITLE_MIN_MESSAGE = `Title must be at least ${TITLE_MIN_LENGTH} characters`;
+export const DESCRIPTION_EXCEEDED_MESSAGE = `Description cannot exceed ${DESCRIPTION_MAX_LENGTH} characters`;
+export const DESCRIPTION_MIN_MESSAGE = `Description must be at least ${DESCRIPTION_MIN_LENGTH} characters`;
 
 export const titleSchema = z.object({
   title: z
     .string()
     .min(TITLE_MIN_LENGTH, TITLE_MIN_MESSAGE)
     .max(TITLE_MAX_LENGTH, TITLE_EXCEEDED_MESSAGE),
+});
+
+export const taskSchema = z.object({
+  title: titleSchema.shape.title,
+  description: z
+    .string()
+    .min(DESCRIPTION_MIN_LENGTH, DESCRIPTION_MIN_MESSAGE)
+    .max(DESCRIPTION_MAX_LENGTH, DESCRIPTION_EXCEEDED_MESSAGE),
 });
 
 interface PriorityIconProps {
