@@ -27,24 +27,29 @@ describe("Dashboard Flow", () => {
 
     // Verify the task appears in the default column (e.g., "To Do")
     cy.contains("New Task Title")
-      .parents("[data-task-id]") // Adjust this selector to match the task container
+      .parents("[data-task-id]")
       .within(() => {
         // Click on options menu of the task
         cy.get("[aria-label='Options']").click();
-
-        // Click on the "Delete" option
-        cy.get("button[aria-label='Delete Task']").click();
+        // Click on the "Status" option
+        cy.get("[aria-label='Select Status']").click();
+        // Select "Done" from the dropdown
+        cy.get("[aria-label='Select Done']").click();
       });
 
-    // // Drag and drop the task to the "Done" column
-    // cy.contains("New Task Title")
-    //   .trigger("mousedown", { which: 1 })
-    //   .trigger("mousemove", { clientX: 600, clientY: 200 }) // Adjust coordinates as needed
-    //   .trigger("mouseup", { force: true });
+    // Verify the task is now in the "Done" column
+    cy.get("[data-column-title='Done']").within(() => {
+      cy.contains("New Task Title").should("exist");
+    });
 
-    // // Verify the task is now in the "Done" column
-    // cy.get("[data-column-title='Done']").within(() => {
-    //   cy.contains("New Task Title").should("exist");
-    // });
+    // Delete the task
+    cy.contains("New Task Title")
+      .parents("[data-task-id]")
+      .within(() => {
+        // Click on options menu of the task
+        cy.get("[aria-label='Options']").click();
+        // Click on the "Delete" option
+        cy.get("[aria-label='Delete Task']").click();
+      });
   });
 });
