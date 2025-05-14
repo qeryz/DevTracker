@@ -36,3 +36,13 @@ export const updateTask = async (
     throw new Error("Failed to update task");
   }
 };
+
+// Delete a task
+export const deleteTask = async (id: number): Promise<void> => {
+  try {
+    await axiosInstance.delete(`/tasks/${id}/`);
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    throw new Error("Failed to delete task");
+  }
+};

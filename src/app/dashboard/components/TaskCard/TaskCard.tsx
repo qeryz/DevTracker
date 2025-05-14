@@ -8,6 +8,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import useTaskStore from "@/store/useTaskStore";
 import DetailedTaskCard from "../DetailedTaskCard/DetailedTaskCard";
+import { OptionsMenu } from "./components/OptionsMenu";
 
 interface TaskCardProps {
   task: Task;
@@ -45,7 +46,10 @@ const TaskCard = ({ task }: TaskCardProps) => {
         onClick={handleOpenModal}
         className="bg-white shadow-sm rounded-lg p-4 mb-4 hover:bg-gray-200 transition ease-in-out duration-300 cursor-pointer"
       >
-        <EditableTitle task={task} />
+        <div className="flex items-center justify-between">
+          <EditableTitle task={task} />
+          <OptionsMenu taskId={task.id} />
+        </div>
         <div onClick={(e) => e.stopPropagation()}>
           <PriorityList task={task} />
         </div>
