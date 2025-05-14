@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DefaultAvatar, LogoutButton } from "./index";
 import useClickOutside from "@/hooks/useClickOutside";
+import { HomeIcon } from "@heroicons/react/24/solid";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -16,7 +17,10 @@ export const Navbar = () => {
 
   return (
     <nav className="w-full px-4 py-2 bg-gray-50 flex items-center justify-between z-50 sticky top-0 border-b border-gray-300">
-      <div className="text-xl font-bold">DevTracker</div>
+      <div className="flex items-center gap-2">
+        <HomeIcon className="h-6 w-6 text-gray-700" />
+        <span className="text-xl font-bold select-none">DevTracker</span>
+      </div>
       <div className="flex items-center gap-4" ref={dropdownRef}>
         <button
           className="flex items-center relative group"
