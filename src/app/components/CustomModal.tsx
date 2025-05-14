@@ -54,9 +54,9 @@ export const CustomModal = ({
               className="flex flex-col bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 h-full flex-grow"
             >
               <div className="flex flex-col sm:items-start w-full h-full flex-grow">
-                <div className="flex flex-col mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full h-full flex-grow">
+                <div className="flex flex-col mt-1 text-center sm:mt-0 sm:text-left w-full h-full flex-grow">
                   <div
-                    className="text-base font-semibold text-gray-900 mt-8"
+                    className="text-base font-semibold text-gray-900 mt-2"
                     id="modal-title"
                   >
                     {title}
