@@ -4,6 +4,7 @@ A Jira-style task management app featuring modern UI, drag-and-drop task board, 
 
 ## 📸 Screenshots
 ![image](https://github.com/user-attachments/assets/e69df2fc-c8e3-4aad-92ac-228d1f79f010)
+![image](https://github.com/user-attachments/assets/c18132cd-e6d3-4107-afe6-4a647ba5850d)
 
 
 ## ✨ Features
