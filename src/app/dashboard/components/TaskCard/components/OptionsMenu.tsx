@@ -88,7 +88,6 @@ export const OptionsMenu = ({ task }: OptionsMenuProps) => {
               }))}
               selectedId={task.status.id}
               onChange={handleStatusChange}
-              aria-label="Change Task Status"
             />
           </div>
         </div>
