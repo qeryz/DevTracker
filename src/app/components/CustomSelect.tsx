@@ -41,6 +41,7 @@ export const CustomSelect = ({
           } focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm`}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
+          aria-label={`Select ${label}`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="col-start-1 row-start-1 flex items-center gap-3 pr-6">
@@ -73,6 +74,7 @@ export const CustomSelect = ({
             {options.map((option) => (
               <li
                 key={option.id}
+                aria-label={`Select ${option.label}`}
                 className={`relative cursor-pointer py-2 pr-9 pl-3 text-gray-900 select-none hover:bg-gray-100 ${
                   selectedId === option.id ? "font-semibold" : "font-normal"
                 }`}
