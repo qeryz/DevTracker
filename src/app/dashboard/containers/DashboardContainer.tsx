@@ -32,12 +32,9 @@ const DashboardContainer = () => {
   ].filter(Boolean);
   const firstError = errors.find((error) => error instanceof Error);
 
-  if (firstError) {
-    console.error(
-      "Error fetching data:",
-      firstError.message || "Unknown error",
-    );
-    return <div>Error: {firstError.message || "Unknown error"}</div>;
+  if (firstError && firstError instanceof Error) {
+    console.error("Error fetching data:", firstError.message);
+    return <div>Error: {firstError.message}</div>;
   }
   return <Dashboard />;
 };
