@@ -29,6 +29,8 @@ A Jira-style task management app featuring modern UI, drag-and-drop task board, 
 
 ## 🚀 Getting Started
 
+Check out the deployed app [here](https://devtrackerapp.netlify.app/dashboard)
+
 ```bash
 # Clone the repo
 git clone https://github.com/your-username/devtracker.git
