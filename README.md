@@ -2,11 +2,6 @@
 
 A Jira-style task management app featuring modern UI, drag-and-drop task board, commenting, authentication, and more.
 
-## 📸 Screenshots
-![image](https://github.com/user-attachments/assets/e69df2fc-c8e3-4aad-92ac-228d1f79f010)
-![image](https://github.com/user-attachments/assets/c18132cd-e6d3-4107-afe6-4a647ba5850d)
-
-
 ## ✨ Features
 
 - JWT authentication
@@ -26,6 +21,12 @@ A Jira-style task management app featuring modern UI, drag-and-drop task board, 
 - **Testing:** Jest, Cypress
 - **Auth:** JWT
 
+## 📸 Screenshots
+
+| Dashboard                |  Detailed Task Card |
+:-------------------------:|:-------------------------:
+![image](https://github.com/user-attachments/assets/e69df2fc-c8e3-4aad-92ac-228d1f79f010) | ![image](https://github.com/user-attachments/assets/c18132cd-e6d3-4107-afe6-4a647ba5850d)
+
 ## 🚀 Getting Started
 
 ```bash
@@ -43,12 +44,18 @@ npm run dev
 ## 📝 Testing
 
 ✅ Unit Testing: via Jest
-
-<img src="https://github.com/user-attachments/assets/4805e723-2fc5-4b7a-99cf-15d1093f0cd2" style="width:350px; height:auto" alt="jest">
+```
+npm test
+```
 
 ✅ E2E Testing: via Cypress for full user MVP flow and interaction coverage
+```
+npm run cypress:open
+```
 
-<img src="https://github.com/user-attachments/assets/b17f8c0c-e500-4a29-94b6-a868e1a76ec4" style="width:350px; height:auto" alt="e2e">
+| Jest                |  Cypress E2E |
+:-------------------------:|:-------------------------:
+![image](https://github.com/user-attachments/assets/4805e723-2fc5-4b7a-99cf-15d1093f0cd2) | ![image](https://github.com/user-attachments/assets/b17f8c0c-e500-4a29-94b6-a868e1a76ec4)
 
 ## 📰 Entity Relationship Model
 ```mermaid
