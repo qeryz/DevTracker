@@ -44,7 +44,11 @@ npm run dev
 
 ✅ Unit Testing: via Jest
 
+<img src="https://github.com/user-attachments/assets/4805e723-2fc5-4b7a-99cf-15d1093f0cd2" style="width:350px; height:auto" alt="jest">
+
 ✅ E2E Testing: via Cypress for full user MVP flow and interaction coverage
+
+<img src="https://github.com/user-attachments/assets/b17f8c0c-e500-4a29-94b6-a868e1a76ec4" style="width:350px; height:auto" alt="e2e">
 
 ## 📰 Entity Relationship Model
 ```mermaid
