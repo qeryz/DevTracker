@@ -18,7 +18,7 @@ const Column = ({ title, tasks }: ColumnProps) => {
       className="flex flex-col bg-gray-100 rounded-lg p-4 shadow-md max-w-80 min-h-50"
     >
       <h2
-        className="text-sm text-gray-500 mb-4 uppercase color-gray-100"
+        className="text-sm text-gray-600 mb-4 uppercase"
         aria-label={`Column title: ${title}`}
       >
         {title}
