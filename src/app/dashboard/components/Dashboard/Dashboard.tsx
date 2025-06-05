@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import {
   DndContext,
   DragStartEvent,
@@ -7,9 +8,9 @@ import {
   useSensors,
   PointerSensor,
 } from "@dnd-kit/core";
+const TaskCard = dynamic(() => import("../TaskCard/TaskCard"));
+const TaskForm = dynamic(() => import("../TaskForm/TaskForm"));
 import Column from "../Column/Column";
-import TaskCard from "../TaskCard/TaskCard";
-import TaskForm from "../TaskForm/TaskForm";
 import FilterButton from "@/app/components/FilterButton/FilterButton";
 import { useMutation, useQueryClient } from "react-query";
 import { updateTask } from "@/lib/api/tasks";

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { TagsList } from "@/app/components";
 import AssigneeSection from "./components/AssigneeSection";
 import EditableTitle from "./components/EditableTitle";
@@ -7,8 +8,10 @@ import { Task } from "@/lib/types/api/tasks";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import useTaskStore from "@/store/useTaskStore";
-import DetailedTaskCard from "../DetailedTaskCard/DetailedTaskCard";
 import { OptionsMenu } from "./components/OptionsMenu";
+const DetailedTaskCard = dynamic(
+  () => import("../DetailedTaskCard/DetailedTaskCard"),
+);
 
 interface TaskCardProps {
   task: Task;
