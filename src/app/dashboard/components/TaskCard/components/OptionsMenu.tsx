@@ -58,18 +58,20 @@ export const OptionsMenu = ({ task }: OptionsMenuProps) => {
   useClickOutside(divRef, () => setShowOptions(false));
 
   return (
-    <div className="relative">
-      <EllipsisVerticalIcon
-        className="h-5 w-5 text-gray-400 cursor-pointer hover:text-gray-600"
+    <div className="relative" aria-label="Task Options">
+      <button
         aria-label="Options"
         onClick={(e) => {
           e.stopPropagation();
           setShowOptions((prev) => !prev);
         }}
-      />
+      >
+        <EllipsisVerticalIcon className="h-5 w-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+      </button>
       {showOptions && (
         <div
           ref={divRef}
+          aria-label="Options Menu"
           className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
         >
           <button

@@ -95,7 +95,7 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="p-8">
+    <div className="p-8" role="main" aria-label="Dashboard main content">
       <h2 className="text-2xl font-bold mb-4">Your Tasks</h2>
       <div className="flex gap-4 mb-2">
         <FilterButton />

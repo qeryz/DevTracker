@@ -70,6 +70,8 @@ export const CustomSelect = ({
           <ul
             className="absolute z-10 mt-1 max-h-56 min-w-[max-content] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
             role="listbox"
+            aria-label={`Options for ${label}`}
+            aria-activedescendant={`option-${selectedId}`}
           >
             {options.map((option) => (
               <li
@@ -83,13 +85,17 @@ export const CustomSelect = ({
                   onChange(option.id);
                   setIsOpen(false);
                 }}
+                tabIndex={0}
               >
                 <div className="flex items-center gap-3">
                   {option.icon && option.icon}
                   <span className="block truncate">{option.label}</span>
                 </div>
                 {selectedId === option.id && (
-                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+                  <span
+                    className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                    aria-hidden="true"
+                  >
                     <svg
                       className="size-5"
                       viewBox="0 0 20 20"

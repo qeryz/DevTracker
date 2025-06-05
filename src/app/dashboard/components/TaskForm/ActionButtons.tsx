@@ -21,6 +21,7 @@ const ActionButtons = ({
         type="button"
         onClick={onCancel}
         className="bg-gray-500 text-white py-1.5 px-3 rounded cursor-pointer min-w-50"
+        aria-label={`Cancel ${cancelLabel}`}
       >
         {cancelLabel}
       </button>

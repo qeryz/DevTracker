@@ -61,16 +61,17 @@ const TaskForm = () => {
   useClickOutside(formRef, () => setIsFormVisible(false));
 
   return (
-    <div ref={formRef}>
+    <div ref={formRef} aria-label="Task Form">
       {isFormVisible && (
         <CustomModal
           title="Add Task"
           onClose={() => setIsFormVisible(false)}
           body={
-            <div className="flex flex-grow">
+            <div className="flex flex-grow" aria-label="Task Form Body">
               <form
                 onSubmit={handleSubmit(handleAddTask)}
                 className="flex flex-col w-full h-full gap-4 p-4"
+                aria-label="Task Form Fields"
               >
                 <InputField
                   register={register}

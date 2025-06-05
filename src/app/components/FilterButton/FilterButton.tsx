@@ -42,6 +42,7 @@ const FilterButton = () => {
     <div ref={dropdownRef}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
+        aria-label="Open filter options"
         className="bg-indigo-600 text-white py-1.5 px-3 mb-2 rounded flex items-center hover:cursor-pointer"
       >
         <FunnelIcon className="h-5 w-5 mr-2" />
