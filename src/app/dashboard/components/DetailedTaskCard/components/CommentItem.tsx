@@ -5,7 +5,11 @@ import { CommentMenu } from "./CommentMenu";
 
 export const CommentItem = ({ comment }: { comment: Comments }) => {
   return (
-    <li key={comment.id} className="p-4 bg-gray-100 rounded-md w-full">
+    <li
+      key={comment.id}
+      className="p-4 bg-gray-100 rounded-md w-full"
+      aria-label="Comment Item"
+    >
       <div className="flex items-center w-full gap-2 mb-2">
         <div className="flex items-center gap-2 w-[90%]">
           <DefaultAvatar height={15} width={15} />

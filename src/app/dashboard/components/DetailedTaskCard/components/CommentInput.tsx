@@ -50,6 +50,7 @@ export const CommentInput = ({ taskId }: { taskId: number }) => {
         <button
           type="submit"
           className="flex items-center cursor-pointer ml-2 w-8 h-8 p-2 bg-indigo-600 text-white rounded-full hover:bg-blue-600"
+          aria-label="Submit Comment"
         >
           <ArrowUpIcon className="h-4 w-4" />
         </button>

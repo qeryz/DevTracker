@@ -14,6 +14,7 @@ export const DefaultAvatar = ({ height, width }: DefaultAvatarProps) => {
       width={width}
       height={height}
       className="inline-block rounded-full cursor-pointer"
+      aria-label="Default Avatar"
     />
   );
 };
