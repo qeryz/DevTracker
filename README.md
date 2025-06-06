@@ -12,6 +12,7 @@ A Jira-style task management app featuring modern UI, drag-and-drop task board, 
 - Zod validation + React Hook Form
 - Zustand + React Query state management
 - Jest unit testing & Cypress E2E
+- Best practices (modularization, code splitting, lazy loading, etc)
 
 ## 🛠️ Tech Stack
 
