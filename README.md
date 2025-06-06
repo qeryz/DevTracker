@@ -99,6 +99,9 @@ graph LR
   API --> DB
 ```
 
+## ⚡ Google Lighthouse Metrics
+<img src="https://github.com/user-attachments/assets/62ed053e-3223-4a8f-bd6c-2a509f733db5" width="400" />
+
 ## 📂 Folder Structure
 ```
 src/
