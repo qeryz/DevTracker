@@ -12,6 +12,7 @@ A Jira-style task management app featuring modern UI, drag-and-drop task board, 
 - Zod validation + React Hook Form
 - Zustand + React Query state management
 - Jest unit testing & Cypress E2E
+- Best practices (modularization, code splitting, lazy loading, etc)
 
 ## 🛠️ Tech Stack
 
@@ -58,6 +59,9 @@ npm run cypress:open
 | Jest                |  Cypress E2E |
 :-------------------------:|:-------------------------:
 ![image](https://github.com/user-attachments/assets/4805e723-2fc5-4b7a-99cf-15d1093f0cd2) | ![image](https://github.com/user-attachments/assets/b17f8c0c-e500-4a29-94b6-a868e1a76ec4)
+
+## ⚡ Google Lighthouse Metrics
+<img src="https://github.com/user-attachments/assets/62ed053e-3223-4a8f-bd6c-2a509f733db5" width="400" />
 
 ## 📰 Entity Relationship Model
 ```mermaid
